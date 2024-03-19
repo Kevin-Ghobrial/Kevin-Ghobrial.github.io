@@ -23,32 +23,24 @@ header {
   background-color: #333; /* Dark gray header */
   color: #fff; /* Header text color */
   padding: 20px 0;
+  display: flex;
+  justify-content: space-between; /* Align items horizontally */
+  align-items: center; /* Center vertically */
 }
 
 header h1 {
   font-size: 1.8rem;
-  text-align: center; /* Center the heading */
+  margin-left: 20px; /* Add space between name and buttons */
 }
 
 /* Navigation menu styles */
-nav {
-  position: absolute;
-  top: 50%; /* Move the navigation to the middle of the header */
-  right: 20px; /* Align the navigation to the right side of the header */
-  transform: translateY(-50%); /* Center the navigation vertically */
-}
-
 nav ul {
   list-style: none;
+  margin-right: 20px; /* Add space between buttons */
 }
 
 nav ul li {
   display: inline;
-  margin-left: 20px; /* Add space between menu items */
-}
-
-nav ul li:first-child {
-  margin-left: 0; /* Remove margin from the first menu item */
 }
 
 nav ul li a {
@@ -77,3 +69,4 @@ footer {
 footer p {
   font-size: 1rem;
 }
+
