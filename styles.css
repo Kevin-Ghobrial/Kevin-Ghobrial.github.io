@@ -6,9 +6,8 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  line-height: 1.6;
-  background-color: #f8f8f8;
+  background-color: #fff; /* Set background color to white */
+  font-family: Arial, sans-serif; /* Use a fallback font */
 }
 
 .container {
@@ -17,8 +16,8 @@ body {
 }
 
 header {
-  background-color: transparent;
-  color: #fff;
+  background-color: transparent; /* Remove gray background */
+  color: #333; /* Change text color */
   padding: 20px 0;
 }
 
@@ -36,217 +35,21 @@ nav ul li {
 }
 
 nav ul li a {
-  color: #333;
+  color: #333; /* Change text color */
   text-decoration: none;
   font-size: 1.2rem;
 }
 
 main {
   padding: 20px 0;
-}
-
-section {
-  margin-bottom: 40px;
-}
-
-.container h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 10px 0;
-  text-align: center;
-}
-
-footer p {
-  font-size: 1rem;
 }
 
 #home {
-  text-align: center;
-  padding: 100px 0;
-  background-color: transparent;
-  color: #fff;
-}
-
-#home h1 {
-  font-size: 3rem;
-  margin-bottom: 20px;
-}
-
-#home p {
-  font-size: 1.5rem;
-  margin-bottom: 30px;
-}
-
-.buttons {
-  display: flex;
-  justify-content: center;
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 20px;
-  margin: 0 10px;
-  background-color: #fff;
-  color: #007bff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.project-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
-.project-card {
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.project-card img {
-  width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ddd;
-}
-
-.project-card h3 {
-  font-size: 1.5rem;
-  margin: 15px 0;
-  color: #333;
-}
-
-.project-card p {
-  margin: 0 15px 15px;
-  color: #666;
-}
-
-.project-card a {
-  display: block;
-  background-color: #007bff;
-  color: #fff;
-  text-align: center;
-  padding: 10px 0;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
-}
-
-.project-card a:hover {
-  background-color: #0056b3;
-}
-
-/* Your existing styles */
-
-/* New styles for the layout */
-.intro {
-  display: flex;
-  align-items: center;
-}
-
-.description {
-  flex: 1;
-  padding-right: 20px; /* Adjust as needed */
-}
-
-.description h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.description p {
-  font-size: 1.2rem;
-  color: #666;
-}
-
-img {
-  max-width: 100%;
-}
-
-header {
-  position: relative;
-}
-
-nav {
-  position: absolute;
-  top: 20px;
-  right: 50px;
-}
-
-nav ul {
-  list-style: none;
-}
-
-nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-/* Reset default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #f2f2f2; /* Light grayish white background */
-}
-
-.container {
-  width: 90%;
-  margin: 0 auto;
-}
-
-header {
-  background-color: #333;
-  color: #fff;
-  padding: 20px 0;
-}
-
-header h1 {
-  font-size: 1.8rem;
-}
-
-nav ul {
-  list-style: none;
-}
-
-nav ul li {
-  display: inline;
-  margin-right: 20px;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-main {
-  padding: 20px 0;
+  background-color: transparent; /* Remove blue background from home page */
 }
 
 .intro-section {
-  background-color: #fff;
+  background-color: transparent; /* Remove background color */
   padding: 20px;
   border-radius: 10px;
   margin-top: 20px; /* Add some space between header and intro section */
@@ -277,3 +80,16 @@ img {
   max-width: 100%;
 }
 
+#resume {
+  height: 100vh; /* Set the height of the resume section to full screen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff; /* Set a background color for better clarity */
+}
+
+#resume img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Maintain aspect ratio and fit the image within the container */
+}
