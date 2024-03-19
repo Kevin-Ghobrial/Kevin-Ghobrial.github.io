@@ -147,3 +147,57 @@ footer p {
 .project-card a:hover {
   background-color: #0056b3;
 }
+
+/* Your existing styles */
+
+/* New styles for the layout */
+.intro {
+  display: flex;
+  align-items: center;
+}
+
+.description {
+  flex: 1;
+  padding-right: 20px; /* Adjust as needed */
+}
+
+.description h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.description p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+img {
+  max-width: 100%;
+  border-radius: 50%;
+}
+
+header {
+  position: relative;
+}
+
+nav {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
