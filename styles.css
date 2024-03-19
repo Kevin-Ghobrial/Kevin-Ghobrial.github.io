@@ -5,134 +5,90 @@
   box-sizing: border-box;
 }
 
+/* Body styles */
 body {
-  background-color: #fff; /* Set background color to white */
-  font-family: Arial, sans-serif; /* Use a fallback font */
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8; /* Light gray background */
+  color: #333; /* Text color */
 }
 
+/* Container styles */
 .container {
   width: 90%;
   margin: 0 auto;
 }
 
+/* Header styles */
 header {
-  background-color: transparent; /* Remove gray background */
-  color: #333; /* Change text color */
+  background-color: #333; /* Dark gray header */
+  color: #fff; /* Header text color */
   padding: 20px 0;
 }
 
 header h1 {
   font-size: 1.8rem;
+  text-align: center; /* Center the heading */
 }
 
+/* Navigation menu styles */
 nav ul {
   list-style: none;
+  text-align: center; /* Center the menu items */
 }
 
 nav ul li {
   display: inline;
-  margin-right: 20px;
+  margin-right: 20px; /* Add space between menu items */
+}
+
+nav ul li:last-child {
+  margin-right: 0; /* Remove margin from the last menu item */
 }
 
 nav ul li a {
-  color: #333; /* Change text color */
+  color: #fff; /* Menu item text color */
   text-decoration: none;
   font-size: 1.2rem;
 }
 
+nav ul li a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Main content styles */
 main {
   padding: 20px 0;
 }
 
-#home {
-  background-color: transparent; /* Remove blue background from home page */
+/* Portfolio section styles */
+.portfolio-item {
+  margin-bottom: 30px; /* Add space between portfolio items */
 }
 
-.intro-section {
-  background-color: transparent; /* Remove background color */
-  padding: 20px;
-  border-radius: 10px;
-  margin-top: 20px; /* Add some space between header and intro section */
+.portfolio-item img {
+  max-width: 100%;
+  display: block; /* Ensure images fill their container */
+  border-radius: 5px; /* Rounded corners for images */
 }
 
-.intro {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.portfolio-item h2 {
+  font-size: 1.5rem;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.portfolio-item p {
+  font-size: 1.1rem;
+}
+
+/* Footer styles */
+footer {
+  background-color: #333; /* Dark gray footer */
+  color: #fff; /* Footer text color */
+  padding: 20px 0;
   text-align: center;
 }
 
-.intro-content {
-  margin-bottom: 20px; /* Add space between description and image */
-}
-
-.intro-content h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.intro-content p {
-  font-size: 1.2rem;
-  color: #666;
-}
-
-img {
-  max-width: 100%;
-}
-
-#resume {
-  height: 100vh; /* Set the height of the resume section to full screen */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #fff; /* Set a background color for better clarity */
-}
-
-#resume img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain; /* Maintain aspect ratio and fit the image within the container */
-}
-
-nav {
-  position: absolute;
-  top: 20px;
-  right: 20px; /* Adjust this value to move the buttons to the right */
-}
-
-/* Your existing styles */
-
-/* Adjust the positioning of the navigation menu */
-nav {
-  position: absolute;
-  top: 50%; /* Move the navigation to the middle of the header */
-  right: 20px; /* Align the navigation to the right side of the header */
-  transform: translateY(-50%); /* Center the navigation vertically */
-}
-
-nav ul {
-  text-align: right; /* Align the list items to the right */
-}
-
-nav ul li {
-  display: inline-block; /* Display list items as inline-block elements */
-  margin-left: 10px; /* Add space between each list item */
-}
-
-nav ul li:first-child {
-  margin-left: 0; /* Remove margin from the first list item */
-}
-
-nav ul li a {
-  display: inline-block; /* Display links as inline-block to make them align horizontally */
-  padding: 10px 20px; /* Add padding to the links */
-  background-color: #333; /* Background color for the buttons */
-  color: #fff; /* Text color */
-  text-decoration: none;
-  font-size: 1.2rem;
-  border-radius: 5px; /* Rounded corners for the buttons */
-}
-
-nav ul li a:hover {
-  background-color: #555; /* Darker background color on hover */
+footer p {
+  font-size: 1rem;
 }
