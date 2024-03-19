@@ -37,6 +37,10 @@ header {
     margin-left: 20px;
 }
 
+.main-nav ul li:first-child {
+    margin-left: 0; /* Remove margin from the first button */
+}
+
 .main-nav ul li a {
     color: #fff;
     text-decoration: none;
