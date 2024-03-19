@@ -31,18 +31,24 @@ header h1 {
 }
 
 /* Navigation menu styles */
+nav {
+  position: absolute;
+  top: 50%; /* Move the navigation to the middle of the header */
+  right: 20px; /* Align the navigation to the right side of the header */
+  transform: translateY(-50%); /* Center the navigation vertically */
+}
+
 nav ul {
   list-style: none;
-  text-align: center; /* Center the menu items */
 }
 
 nav ul li {
   display: inline;
-  margin-right: 20px; /* Add space between menu items */
+  margin-left: 20px; /* Add space between menu items */
 }
 
-nav ul li:last-child {
-  margin-right: 0; /* Remove margin from the last menu item */
+nav ul li:first-child {
+  margin-left: 0; /* Remove margin from the first menu item */
 }
 
 nav ul li a {
@@ -58,27 +64,6 @@ nav ul li a:hover {
 /* Main content styles */
 main {
   padding: 20px 0;
-}
-
-/* Portfolio section styles */
-.portfolio-item {
-  margin-bottom: 30px; /* Add space between portfolio items */
-}
-
-.portfolio-item img {
-  max-width: 100%;
-  display: block; /* Ensure images fill their container */
-  border-radius: 5px; /* Rounded corners for images */
-}
-
-.portfolio-item h2 {
-  font-size: 1.5rem;
-  margin-top: 10px;
-  margin-bottom: 5px;
-}
-
-.portfolio-item p {
-  font-size: 1.1rem;
 }
 
 /* Footer styles */
