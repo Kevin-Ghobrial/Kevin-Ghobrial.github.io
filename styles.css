@@ -93,3 +93,9 @@ img {
   max-height: 100%;
   object-fit: contain; /* Maintain aspect ratio and fit the image within the container */
 }
+
+nav {
+  position: absolute;
+  top: 20px;
+  right: 20px; /* Adjust this value to move the buttons to the right */
+}
