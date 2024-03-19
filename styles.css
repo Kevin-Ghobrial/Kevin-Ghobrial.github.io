@@ -99,3 +99,40 @@ nav {
   top: 20px;
   right: 20px; /* Adjust this value to move the buttons to the right */
 }
+
+/* Your existing styles */
+
+/* Adjust the positioning of the navigation menu */
+nav {
+  position: absolute;
+  top: 50%; /* Move the navigation to the middle of the header */
+  right: 20px; /* Align the navigation to the right side of the header */
+  transform: translateY(-50%); /* Center the navigation vertically */
+}
+
+nav ul {
+  text-align: right; /* Align the list items to the right */
+}
+
+nav ul li {
+  display: inline-block; /* Display list items as inline-block elements */
+  margin-left: 10px; /* Add space between each list item */
+}
+
+nav ul li:first-child {
+  margin-left: 0; /* Remove margin from the first list item */
+}
+
+nav ul li a {
+  display: inline-block; /* Display links as inline-block to make them align horizontally */
+  padding: 10px 20px; /* Add padding to the links */
+  background-color: #333; /* Background color for the buttons */
+  color: #fff; /* Text color */
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 5px; /* Rounded corners for the buttons */
+}
+
+nav ul li a:hover {
+  background-color: #555; /* Darker background color on hover */
+}
