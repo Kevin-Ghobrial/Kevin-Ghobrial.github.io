@@ -1,72 +1,54 @@
-/* Reset default styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Body styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f8f8; /* Light gray background */
-  color: #333; /* Text color */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-/* Container styles */
 .container {
-  width: 90%;
-  margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    overflow: hidden;
 }
 
-/* Header styles */
 header {
-  background-color: #333; /* Dark gray header */
-  color: #fff; /* Header text color */
-  padding: 20px 0;
-  display: flex;
-  justify-content: space-between; /* Align items horizontally */
-  align-items: center; /* Center vertically */
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    overflow: hidden;
 }
 
-header h1 {
-  font-size: 1.8rem;
-  margin-left: 20px; /* Add space between name and buttons */
+.logo {
+    float: left;
 }
 
-/* Navigation menu styles */
-nav ul {
-  list-style: none;
-  margin-right: 20px; /* Add space between buttons */
+.main-nav {
+    float: right;
 }
 
-nav ul li {
-  display: inline;
+.main-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-nav ul li a {
-  color: #fff; /* Menu item text color */
-  text-decoration: none;
-  font-size: 1.2rem;
+.main-nav ul li {
+    display: inline-block;
+    margin-left: 20px;
 }
 
-nav ul li a:hover {
-  text-decoration: underline; /* Underline on hover */
+.main-nav ul li a {
+    color: #fff;
+    text-decoration: none;
 }
 
-/* Main content styles */
-main {
-  padding: 20px 0;
+.main-nav ul li a:hover {
+    text-decoration: underline;
 }
 
-/* Footer styles */
 footer {
-  background-color: #333; /* Dark gray footer */
-  color: #fff; /* Footer text color */
-  padding: 20px 0;
-  text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
 }
-
-footer p {
-  font-size: 1rem;
-}
-
