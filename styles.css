@@ -15,7 +15,7 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #444; /* Adjust the color here */
     color: #fff;
     padding: 20px 0;
     overflow: hidden;
@@ -23,6 +23,7 @@ header {
 
 .logo {
     margin: 0;
+    font-size: 24px; /* Adjust the font size as needed */
 }
 
 .main-nav ul {
@@ -50,7 +51,7 @@ header {
 }
 
 footer {
-    background-color: #333;
+    background-color: #444; /* Adjust the color here */
     color: #fff;
     padding: 20px 0;
     text-align: center;
