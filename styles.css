@@ -56,6 +56,9 @@ footer {
 }
 
 img {
-    display: block;
-    margin: 0 auto;
+    position: fixed;
+    top: 0; /* Adjust as needed */
+    right: 0; /* Adjust to position it from the right */
+    max-width: 50%; /* Adjust the width of the image */
+    height: auto;
 }
