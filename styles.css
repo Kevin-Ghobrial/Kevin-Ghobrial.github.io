@@ -16,7 +16,8 @@ body {
 }
 
 header {
-    color: #fff;
+    background-color: #fffdd0; /* Cream color */
+    color: #333; /* Text color */
     padding: 20px 0;
     overflow: hidden;
 }
