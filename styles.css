@@ -60,6 +60,6 @@ img {
     position: fixed;
     top: 10; /* Adjust as needed */
     right: 10; /* Adjust to position it from the right */
-    max-width: 50%; /* Adjust the width of the image */
+    max-width: 30%; /* Adjust the width of the image */
     height: auto;
 }
