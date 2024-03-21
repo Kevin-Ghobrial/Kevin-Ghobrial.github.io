@@ -57,7 +57,7 @@ footer {
 }
 
 img {
-    position: fixed;
+    position: relative;
     top: 10; /* Adjust as needed */
     right: 10; /* Adjust to position it from the right */
     max-width: 30%; /* Adjust the width of the image */
