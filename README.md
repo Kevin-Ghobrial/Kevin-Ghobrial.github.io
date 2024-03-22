@@ -1,1 +1,2 @@
-Kevin Ghobrial Website
+Kevin Ghobrial Personal Website
+Made to showcase Projects
