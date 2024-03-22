@@ -2,7 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #333; /* Set the background color for the entire page */
+    background-color: #fff; /* Set the background color for the entire page to white */
+    color: #000; /* Set the text color to black */
 }
 
 .container {
@@ -16,10 +17,8 @@ body {
 }
 
 header {
-    background-color: #fffdd0; /* Cream color */
-    color: #333; /* Text color */
-    padding: 20px 0;
-    overflow: hidden;
+    background-color: #fff; /* Set the background color of the header to white */
+    color: #000; /* Set the text color of the header to black */
 }
 
 .logo {
@@ -57,9 +56,10 @@ footer {
 }
 
 img {
-    position: relative;
-    top: 10; /* Adjust as needed */
-    right: 10; /* Adjust to position it from the right */
+    position: absolute; /* Change position to absolute */
+    top: 10px; /* Adjust the top position */
+    right: 50%; /* Position it at the middle horizontally */
+    transform: translateX(50%); /* Move it to the right by 50% of its own width */
     max-width: 30%; /* Adjust the width of the image */
     height: auto;
 }
