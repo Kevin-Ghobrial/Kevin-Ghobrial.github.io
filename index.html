@@ -7,69 +7,63 @@
     <title>Kevin Ghobrial</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa:700" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="index.css">
-    <style>
-        /* Additional CSS for interactive background and styled buttons */
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            background-image: url('staryNight.jpg'); /* Replace 'your-background-image.jpg' with your actual background image */
-            background-size: cover;
-            background-position: center;
-            transition: background-position 0.5s ease;
-        }
-
-        .social-link {
-            display: inline-block;
-            padding: 7px 15px; /* Adjusted padding for smaller buttons */
-            border-radius: 50px; /* This creates an oval shape */
-            background-color: gray;
-            color: white;
-            text-decoration: none;
-            margin: 5px;
-        }
-
-        .social-link:hover {
-            background-color: white;
-            color: gray;
-        }
-    </style>
 </head>
 <body>
     <div id="loading">
         <div id="spinner"></div>
     </div>
     <div id="header" class="animated slideInDown" style="animation-delay:1.8s;">
-        <div id="title">Kevin Ghobrial</div><br>
-        <div id="links">
-            <a href="KevinGhobrialResume.pdf" target="_blank">Resume</a>
-            <a href="#work" style="margin:0px 60px;">Projects</a>
-            <a href="#contact">contact</a>
-        </div>
+    <div id="title">Kevin Ghobrial</div><br>
+    <div id="links">
+        <a href="KevinGhobrialResume.pdf" target="_blank">Resume</a>
+        <a href="#work" style="margin:0px 60px;">Projects</a>
+        <a href="#contact">contact</a>
+    </div>
     </div>
 
+
+    <style>
+    .social-link {
+        display: inline-block;
+        padding: 7px 15px;
+        border-radius: 50px; /* This creates an oval shape */
+        background-color: gray;
+        color: white;
+        text-decoration: none;
+        margin: 5px;
+    }
+
+    .social-link:hover {
+        background-color: white;
+        color: gray;
+    }
+</style>
+    
     <center>
-        <div id="middle">
-            <div id="tagline" class="animated zoomIn" style="animation-delay:1.8s;">
-                I am a Computer Engineering Student at Georgia Tech looking to make the world a better place through Technology<br>
-                <div>
-                    <a href="https://github.com/Kevin-Ghobrial" class="social-link">Github</a>
-                    <a href="https://www.linkedin.com/in/kevin-ghobrial-4a51a121b/" class="social-link">LinkedIn</a>
-                    <a href="https://medium.com/@kevinghobriial" class="social-link">Medium</a>
-                </div>
+    <div id="middle">
+        <div id="tagline" class="animated zoomIn" style="animation-delay:1.8s;">
+            I am a Computer Engineering Student at Georgia Tech looking to make the world a better place through Technology<br>
+            <div>
+                <a href="https://github.com/Kevin-Ghobrial" class="social-link">Github</a>
+                <a href="https://www.linkedin.com/in/kevin-ghobrial-4a51a121b/" class="social-link">LinkedIn</a>
+                <a href="https://medium.com/@kevinghobriial" class="social-link">Medium</a>
             </div>
         </div>
+    </div>
     </center>
 
+
+         
     <div id="work">
         <h1>Projects.</h1>
 
         <div class="project">
-            <h2>AI_HandTracker</h2>
-            <div>Something about hand Tracking</div>
-            <button class="btn_one">visit project</button>
+        <h2>AI_HandTracker</h2>
+        <div>Something about hand Tracking</div>
+        <button class="btn_one">visit project</button>
         </div>
 
         <div class="project">
@@ -78,36 +72,27 @@
             </div>
             <button class="btn_one">visit project</button>
             <button class="btn_two">code</button>
-        </div>
-    </div>
+            </div>
 
-    <div id="contact">
-        <h1>contact.</h1> 
-        <form>
-            <input type="text" placeholder="name" required>
-            <input type="email" placeholder="email" required><br>
-            <textarea placeholder="your message" required rows="5"></textarea><br>
-            <button class="btn_one">send</button>
-        </form> 
+        </div>
+         
+        <div id="contact">
+            <h1>contact.</h1> 
+            <form>
+                <input type="text" placeholder="name" required>
+                <input type="email" placeholder="email" required><br>
+                <textarea placeholder="your message" required rows="5"></textarea><br>
+                <button class="btn_one">send</button>
+            </form> 
         <div id="details">
             <a class="btn_social"><i class="fas fa-phone"></i></a>
             <a class="btn_social"><i class="fas fa-at"></i></a>
             <a class="btn_social"><i class="fab fa-twitter"></i></a>
             <a href="mailto:kghobrial@icloud.com" class="btn_one">send</a>
-        </div>   
-    </div>
+            </div>   
+        </div>
 
-    <script>
-        // JavaScript for interactive background effect
-        document.addEventListener('mousemove', function(event) {
-            const mouseX = event.clientX / window.innerWidth;
-            const mouseY = event.clientY / window.innerHeight;
-            const moveX = (mouseX - 0.5) * 50;
-            const moveY = (mouseY - 0.5) * 50;
-            document.body.style.backgroundPosition = moveX + 'px ' + moveY + 'px';
-        });
-    </script>
 
-    <script src="index.js" type="text/javascript"></script>
+<script src="index.js" type="text/javascript"></script>
 </body>
 </html>
