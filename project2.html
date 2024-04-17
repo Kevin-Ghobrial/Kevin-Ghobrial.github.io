@@ -1,136 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
-  <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="DESCRIPTION META TAG">
-  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
-  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
-  <meta property="og:url" content="URL OF THE WEBSITE"/>
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/image/your_banner_image.png" />
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
-
-
-  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
-  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
-  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
-  <meta name="twitter:card" content="summary_large_image">
-  <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-  <title>Academic Project Page</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-  rel="stylesheet">
-
-  <link rel="stylesheet" href="static/css/bulma.min.css">
-  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="static/css/index.css">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
-  <script defer src="static/js/fontawesome.all.min.js"></script>
-  <script src="static/js/bulma-carousel.min.js"></script>
-  <script src="static/js/bulma-slider.min.js"></script>
-  <script src="static/js/index.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Page</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
 </head>
 <body>
+    <header>
+        <h1>Project Title</h1>
+    </header>
 
+    <section id="project-content">
+        <div id="project-description">
+            <h2>Description</h2>
+            <p>Put your project description here.</p>
+        </div>
 
-  <section class="hero">
-    <div class="hero-body">
-      <div class="container is-max-desktop">
-        <div class="columns is-centered">
-          <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">AiHandTracker</h1>
-            <div class="is-size-5 publication-authors">
-              
-               
-  
+        <div id="project-media">
+            <h2>Media</h2>
+            <!-- GIF -->
+            <div class="media-item">
+                <h3>GIF</h3>
+                <img src="path/to/your/gif.gif" alt="Project GIF">
+            </div>
+
+            <!-- Video -->
+            <div class="media-item">
+                <h3>Video</h3>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/your-video-id" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <!-- Image -->
+            <div class="media-item">
+                <h3>Image</h3>
+                <img src="path/to/your/image.jpg" alt="Project Image">
             </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-
-<!-- Teaser video-->
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
-        <source src="static/videos/banner_video.mp4"
-        type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-        As you can see in the video. I used a library trained on knuckles, and the computer will adjust the volume based on my hand.
-      </h2>
-    </div>
-  </div>
-</section>
-<!-- End teaser video -->
-
-<!-- Paper abstract -->
-<section class="section hero is-light">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Description</h2>
-        <div class="content has-text-justified">
-          <p>
-            Introducing the AuralSense Hand Tracker: an AI-driven device redefining audio control. This sleek gadget employs state-of-the-art computer vision and machine learning to precisely track hand movements in real-time. Compatible with various audio systems, it connects seamlessly and requires minimal setup.
-
-            Operating the AuralSense Hand Tracker is intuitive: raise your finger to increase volume and lower it to decrease. Its advanced algorithms ensure precise adjustments with every gesture. Beyond volume control, it enables track switching, play/pause commands, and customizable gestures.
-
-            Adaptable to different lighting conditions, it maintains accuracy in any environment. Privacy is prioritized, with all data processed locally for security. Say goodbye to traditional remotes; the AuralSense Hand Tracker offers a futuristic, gesture-controlled audio experience.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-
-<!-- Image carousel -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-       <div class="item">
-        <!-- Your image here -->
-        <img src="Screen Shot 2024-04-16 at 9.41.45 PM.jpg" alt="MY ALT TEXT"/>
-        <h2 class="subtitle has-text-centered">
-          <a href="https://medium.com/@kevinghobriial/how-i-made-a-hand-tracking-volume-control-system-using-python-5689b7c13cf7" target="_blank">Project Article Link</a>
-        </h2>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- End image carousel -->
-
-
-
-
-<!-- Statcounter tracking code -->
-  
-<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
-
-    <!-- End of Statcounter Code -->
-
-  </body>
-  </html>
+    <footer>
+        <p>&copy; 2024 Your Name</p>
+    </footer>
+</body>
+</html>
