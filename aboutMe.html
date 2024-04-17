@@ -14,6 +14,20 @@
 
     <title>Kevin Ghobrial</title>
 
+    <!-- Add CSS styles here -->
+    <style>
+        .profile-img,
+        .image-grid img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .image-grid img:nth-child(2),
+        .image-grid img:nth-child(3) {
+            height: 200px; /* Adjust the height as desired */
+        }
+    </style>
+
 </head>
 
 
@@ -23,6 +37,20 @@
     <div class="profile-page">
 
         <div class="page-header">
+
+
+            <nav class="navbar navbar-expand-md bg-primary navbar-dark">
+                <div class="container-fluid container">
+                    <a class="navbar-brand log" href="#"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#collapsibleNavbar">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+                   
+                    </div>
+                </div>
+            </nav>
 
             <a href="#about" class="go" title="Read More">
                 <svg t="1628741268385" class="j-icon" viewBox="0 0 1024 1024" version="1.1"
@@ -79,17 +107,6 @@
   
     </div>
 
-.profile-img,
-.image-grid img {
-    max-width: 80%; /* Set the maximum width to 100% of their container */
-    height: auto; /* Ensure the aspect ratio is maintained */
-}
-
-.image-grid img:nth-child(2),
-.image-grid img:nth-child(3) {
-    height: 200px; /* Adjust the height as desired */
-}
-
 </body>
 <script src="./JS/jquery-3.6.0.js">
 </script>
@@ -106,7 +123,4 @@
     AOS.init();
 </script>
 
-
-
 </html>
-
