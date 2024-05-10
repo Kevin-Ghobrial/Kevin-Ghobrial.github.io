@@ -11,19 +11,62 @@
     <link rel="stylesheet" href="./CSS/animate.min.css">
     <link href="./CSS/aos.css" rel="stylesheet">
 
-    <title>Kevin Ghobrial</title>
+    <title>Kevin Ghobrial - About Me</title>
 
     <!-- Add CSS styles here -->
     <style>
-        .profile-img,
-        .image-grid img {
-            max-width: 95%;
-            height: auto;
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
         }
 
-        .image-grid img:nth-child(2),
-        .image-grid img:nth-child(3) {
-            height: 210px; /* Adjust the height as desired */
+        .profile-page {
+            padding: 50px 0;
+        }
+
+        .about-section {
+            background-color: #fff;
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-section h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .image-grid {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .image-grid img {
+            max-width: 48%;
+            border-radius: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .image-grid {
+                flex-direction: column;
+            }
+
+            .image-grid img {
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
         }
     </style>
 
@@ -39,9 +82,7 @@
             <a href="#about" class="go" title="Read More">
                 <svg t="1628741268385" class="j-icon" viewBox="0 0 1024 1024" version="1.1"
                     xmlns="http://www.w3.org/2000/svg" p-id="5238" width="32" height="32">
-                    <path
-                        d="M780.190476 498.070349c0 4.534857-2.21054 9.638603-5.461333 13.003175l-255.024762 263.476825c-3.299556 3.397079-8.208254 5.640127-12.580571 5.640127-4.388571 0-9.313524-2.275556-12.580572-5.640127l-255.024762-263.476825a19.732317 19.732317 0 0 1-5.461333-13.003175c0-4.518603 2.21054-9.622349 5.461333-12.98692l27.355429-28.265651c3.299556-3.397079 7.671873-5.640127 12.580571-5.640127 4.388571 0 9.313524 2.275556 12.564318 5.640127L507.12381 679.042032l215.105015-222.224254c3.283302-3.397079 8.192-5.640127 12.564318-5.640127 4.388571 0 9.313524 2.275556 12.580571 5.640127l27.355429 28.281905c3.283302 3.380825 5.461333 8.452063 5.461333 12.970666z m0-217.120508c0 4.534857-2.21054 9.638603-5.461333 13.003175l-255.024762 263.476825c-3.299556 3.397079-8.208254 5.640127-12.580571 5.640127-4.388571 0-9.313524-2.275556-12.580572-5.640127l-255.024762-263.476825a19.732317 19.732317 0 0 1-5.461333-13.003175c0-4.518603 2.21054-9.622349 5.461333-12.98692l27.355429-28.265651c3.299556-3.397079 7.671873-5.640127 12.580571-5.640127 4.388571 0 9.313524 2.275556 12.564318 5.640127L507.12381 461.937778l215.105015-222.224254c3.283302-3.397079 8.192-5.640127 12.564318-5.640127 4.388571 0 9.313524 2.275556 12.580571 5.640127l27.355429 28.281905c3.283302 3.380825 5.461333 8.452063 5.461333 12.970666z"
-                        p-id="5239" fill="#1296db"></path>
+                    <!-- Add your SVG code here -->
                 </svg>
             </a>
             <div class="page-header-mask"></div>
@@ -49,46 +90,52 @@
                 <!-- Add your image here -->
                 Welcome! Feel free to play around with these particles :)
                 <img src="keving.jpg" alt="Profile Picture" class="profile-img">
-                
             </div>
-
-
         </div>
 
         <!-- Description section -->
         <section id="about" class="section about-section">
             <div class="container">
-                <div class="row justify-content-center"> <!-- Center the row -->
-                    <div class="col-md-6">
-                        <!-- Add your description here -->
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
                         <h2>About Me</h2>
-                        <p>Hello there! I'm Kevin Ghobrial, a computer engineering student at Georgia Tech! As a firm believer in the transformative power of technology, I'm on a mission to make your life more enjoyable.</p>
-    
+                        <p>Hello there! I'm Kevin Ghobrial, a computer engineering student at Georgia Tech! As a firm
+                            believer in the transformative power of technology, I'm on a mission to make your life more
+                            enjoyable.</p>
+
                         <p>Beyond the classroom, I explore various avenues to express my creativity and passions.</p>
-                            
-                        <p>One of my greatest joys is playing the piano. Music is my sanctuary, whether playing classical melodies or improvising my bossa nova beats.</p>
-                            
-                        <p>When I'm not lost in the song, you might spot me figure skating or playing soccer</p>
-                            
-                        <p>But it's not all about solo pursuits. I'm proud to serve at my Coptic Orthodox Church, where I find fulfillment in making a positive impact.</p>
-                            
-                        <p>My adventurous spirit extends beyond sports and music. I'm a wanderlust, always eager to embark on new journeys and immerse myself in diverse cultures. From traversing the bustling streets of Cairo to hiking through the serene beauty of the Sinai Peninsula, every adventure fuels my passion for exploration.</p>
 
                         <div class="image-grid">
                             <img src="piano.jpg" alt="Piano Picture">
-                            <img src="figure.jpg" alt="Figure Skating Picture" width="300">
+                            <img src="figure.jpg" alt="Figure Skating Picture">
                         </div>
 
-                        <p>Being bilingual in Arabic and English allows me to bridge cultures and connect with people from all walks of life. It's a constant reminder of my roots and the rich tapestry of experiences that have shaped me into who I am today.</p>
-    
-                        <p>As I embark on this journey, I'm excited to explore new opportunities and contribute my skills to meaningful projects that align with my values and aspirations. If you share my passion for technology and innovation, I'd love to connect with you!</p>
-                            
-                        <p>Feel free to contact me via email at kghobrial@icloud.com. Let's collaborate, inspire, and make a difference together!</p>
+                        <p>One of my greatest joys is playing the piano. Music is my sanctuary, whether playing
+                            classical melodies or improvising my bossa nova beats. When I'm not lost in the song, you
+                            might spot me figure skating or playing soccer.</p>
+
+                        <p>But it's not all about solo pursuits. I'm proud to serve at my Coptic Orthodox Church, where
+                            I find fulfillment in making a positive impact.</p>
+
+                        <p>My adventurous spirit extends beyond sports and music. I'm a wanderlust, always eager to
+                            embark on new journeys and immerse myself in diverse cultures.</p>
+
+                        <p>Being bilingual in Arabic and English allows me to bridge cultures and connect with people
+                            from all walks of life.</p>
+
+                        <p>As I embark on this journey, I'm excited to explore new opportunities and contribute my
+                            skills to meaningful projects that align with my values and aspirations.</p>
+
+                        <p>If you share my passion for technology and innovation, I'd love to connect with you!</p>
+
+                        <p>Feel free to contact me via email at <a href="mailto:kghobrial@icloud.com"
+                                style="color: #1296db;">kghobrial@icloud.com</a>. Let's collaborate, inspire, and make a
+                            difference together!</p>
                     </div>
                 </div>
             </div>
         </section>
-  
+
     </div>
 
 </body>
@@ -108,4 +155,5 @@
 </script>
 
 </html>
+
 
