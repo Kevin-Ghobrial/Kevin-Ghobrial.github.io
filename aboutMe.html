@@ -1,38 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./images/2.jpg" type="image/x-icon">
+    <title>Kevin Ghobrial - About Me</title>
     <link rel="stylesheet" href="./CSS/bootstrap.min.css">
     <link rel="stylesheet" href="./CSS/personal-info-main.css">
     <link rel="stylesheet" href="./CSS/personal-info-animate.css">
     <link rel="stylesheet" href="./CSS/animate.min.css">
     <link href="./CSS/aos.css" rel="stylesheet">
 
-    <title>Kevin Ghobrial - About Me</title>
-
     <!-- Add CSS styles here -->
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
-            background-color: #f8f9fa;
-            color: #333;
             margin: 0;
             padding: 0;
         }
 
         .profile-page {
-            padding: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header {
+            position: relative;
+            height: 300px; /* Adjust height as needed */
+            overflow: hidden;
+        }
+
+        .page-header .profile-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 100%;
+            height: auto;
+            z-index: 1;
+        }
+
+        .page-header-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #1296db;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .page-header-particles p {
+            font-size: 24px;
         }
 
         .about-section {
+            padding: 50px 0;
             background-color: #fff;
-            padding: 50px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
         }
 
         .about-section h2 {
@@ -69,28 +98,18 @@
             }
         }
     </style>
-
 </head>
-
 <body>
     <div class="fakeLoader"></div>
 
     <div class="profile-page">
-
         <div class="page-header">
-
-            <a href="#about" class="go" title="Read More">
-                <svg t="1628741268385" class="j-icon" viewBox="0 0 1024 1024" version="1.1"
-                    xmlns="http://www.w3.org/2000/svg" p-id="5238" width="32" height="32">
-                    <!-- Add your SVG code here -->
-                </svg>
-            </a>
-            <div class="page-header-mask"></div>
             <div class="page-header-particles" id="particles-js">
-                <!-- Add your image here -->
-                Welcome! Feel free to play around with these particles :)
-                <img src="keving.jpg" alt="Profile Picture" class="profile-img">
+                <!-- Add your particle animation here -->
+                <p>Welcome! Feel free to play around with these particles :)</p>
             </div>
+            <!-- Profile image -->
+            <img src="keving.jpg" alt="Profile Picture" class="profile-img">
         </div>
 
         <!-- Description section -->
@@ -99,9 +118,8 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8">
                         <h2>About Me</h2>
-                        <p>Hello there! I'm Kevin Ghobrial, a computer engineering student at Georgia Tech! As a firm
-                            believer in the transformative power of technology, I'm on a mission to make your life more
-                            enjoyable.</p>
+                        <!-- Add your description here -->
+                        <p>Hello there! I'm Kevin Ghobrial, a computer engineering student at Georgia Tech! As a firm believer in the transformative power of technology, I'm on a mission to make your life more enjoyable.</p>
 
                         <p>Beyond the classroom, I explore various avenues to express my creativity and passions.</p>
 
@@ -110,50 +128,36 @@
                             <img src="figure.jpg" alt="Figure Skating Picture">
                         </div>
 
-                        <p>One of my greatest joys is playing the piano. Music is my sanctuary, whether playing
-                            classical melodies or improvising my bossa nova beats. When I'm not lost in the song, you
-                            might spot me figure skating or playing soccer.</p>
+                        <p>One of my greatest joys is playing the piano. Music is my sanctuary, whether playing classical melodies or improvising my bossa nova beats. When I'm not lost in the song, you might spot me figure skating or playing soccer.</p>
 
-                        <p>But it's not all about solo pursuits. I'm proud to serve at my Coptic Orthodox Church, where
-                            I find fulfillment in making a positive impact.</p>
+                        <p>But it's not all about solo pursuits. I'm proud to serve at my Coptic Orthodox Church, where I find fulfillment in making a positive impact.</p>
 
-                        <p>My adventurous spirit extends beyond sports and music. I'm a wanderlust, always eager to
-                            embark on new journeys and immerse myself in diverse cultures.</p>
+                        <p>My adventurous spirit extends beyond sports and music. I'm a wanderlust, always eager to embark on new journeys and immerse myself in diverse cultures.</p>
 
-                        <p>Being bilingual in Arabic and English allows me to bridge cultures and connect with people
-                            from all walks of life.</p>
+                        <p>Being bilingual in Arabic and English allows me to bridge cultures and connect with people from all walks of life.</p>
 
-                        <p>As I embark on this journey, I'm excited to explore new opportunities and contribute my
-                            skills to meaningful projects that align with my values and aspirations.</p>
+                        <p>As I embark on this journey, I'm excited to explore new opportunities and contribute my skills to meaningful projects that align with my values and aspirations.</p>
 
                         <p>If you share my passion for technology and innovation, I'd love to connect with you!</p>
 
-                        <p>Feel free to contact me via email at <a href="mailto:kghobrial@icloud.com"
-                                style="color: #1296db;">kghobrial@icloud.com</a>. Let's collaborate, inspire, and make a
-                            difference together!</p>
+                        <p>Feel free to contact me via email at <a href="mailto:kghobrial@icloud.com" style="color: #1296db;">kghobrial@icloud.com</a>.
+                            Let's collaborate, inspire, and make a difference together!</p>
                     </div>
                 </div>
             </div>
         </section>
-
     </div>
 
+    <!-- Add your JavaScript includes here -->
+    <script src="./JS/jquery-3.6.0.js"></script>
+    <script src="./JS/popper.min.js"></script>
+    <script src="./JS/bootstrap.min.js"></script>
+    <script src="./JS/particles.min.js"></script>
+    <script src="./JS/app.js"></script>
+    <script src="./JS/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
 </body>
-<script src="./JS/jquery-3.6.0.js">
-</script>
-<script src="./JS/popper.min.js">
-</script>
-<script src="./JS/bootstrap.min.js">
-</script>
-
-<script src="./JS/particles.min.js"></script>
-<script src="./JS/app.js"></script>
-<script src="./JS/aos.js"></script>
-<script src="./JS/personal-info-main.js"></script>
-<script>
-    AOS.init();
-</script>
-
 </html>
-
 
