@@ -4,7 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Project Page</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+    <link href="https://fonts.googleapis.com/css?family=Georgia|Arial|Verdana&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #fff;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+            background-color: #f8f8f8;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        #project-content {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        #project-description h2 {
+            font-size: 2rem;
+            margin-top: 2rem;
+            font-family: 'Arial', sans-serif;
+        }
+
+        #project-description p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .media-item {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .media-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .media-item img, .media-item iframe {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background: #f8f8f8;
+            margin-top: 2rem;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -14,11 +79,7 @@
     <section id="project-content">
         <div id="project-description">
             <h2>Description</h2>
-            <p> This program can find the top color in any given image array. I did this using assembly. I tried to keep my program as efficient as possible by minimizing the static code I used. I also optimized my code to lower my dynamic instruction count. </d>
-                To do this, I used strategies such as optimizing what does or doesn't go into for-loops. This allowed me to bring my dynamic instructions down to 6000 and my static down to 54. </d>
-                
-            </p>
-           
+            <p>This program can find the top color in any given image array. I did this using assembly. I tried to keep my program as efficient as possible by minimizing the static code I used. I also optimized my code to lower my dynamic instruction count. To do this, I used strategies such as optimizing what does or doesn't go into for-loops. This allowed me to bring my dynamic instructions down to 6000 and my static down to 54.</p>
         </div>
 
         <div id="project-media">
@@ -28,15 +89,7 @@
                 <img src="p1.gif" alt="Project GIF">
             </div>
 
-
-            <style>
-                .media-item img {
-                    max-width: 90%; /* Set the maximum width to 100% of the container */
-                    height: auto; /* Maintain aspect ratio */
-                }
-            </style>
-
-            <!--video-->
+            <!-- Video -->
             <div class="media-item">
                 <h3>Video</h3>
                 <iframe width="560" height="315" src="https://www.youtube.com/embed/iBRwAJw1-6Q?si=JK_HRanKengqV4lX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
@@ -46,7 +99,6 @@
             <div class="media-item">
                 <h3>Images</h3>
                 <img src="p1.jpg" alt="Project Image">
-             
             </div>
         </div>
     </section>
@@ -56,3 +108,4 @@
     </footer>
 </body>
 </html>
+
