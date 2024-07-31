@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="index.css">
     <style>
         .oval-button {
-            border-radius: 20px; /* Adjust the value as needed */
+            border-radius: 20px;
             background-color: #333;
             color: #FF416C;
             padding: 10px 20px;
@@ -23,16 +23,14 @@
         }
 
         .oval-button:hover {
-            background: #FF416C; /* Change background to transparent on hover */
+            background: #FF416C;
             cursor: pointer;
-            color: #333; /* Change text color to dark gray on hover */
+            color: #333;
         }
 
         /* Hide the SoundCloud player */
         #soundcloud_player {
-            width: 0;
-            height: 0;
-            overflow: hidden;
+            display: none;
         }
     </style>
 </head>
@@ -115,7 +113,7 @@
     </div>
 
     <!-- Hidden SoundCloud player -->
-    <iframe id="soundcloud_player" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/kevin-ghobrial-39582200/father-god&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
+    <iframe id="soundcloud_player" width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/kevin-ghobrial-39582200/father-god&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe>
 
     <link rel="stylesheet" href="./CSS/portfolio-section.css">
     <script src="./JS/portfolio-section.js"></script>
