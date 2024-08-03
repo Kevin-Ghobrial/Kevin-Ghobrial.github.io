@@ -144,19 +144,21 @@
                 "https://soundcloud.com/kevin-ghobrial-39582200/no-eye-has-seen"
                 // Add more track URLs here
             ];
-
+    
             // Function to get a random track URL
             function getRandomTrack() {
                 const randomIndex = Math.floor(Math.random() * tracks.length);
                 return tracks[randomIndex];
             }
-
+    
             document.getElementById('play-button').addEventListener('click', function() {
                 const randomTrackUrl = getRandomTrack();
                 const soundCloudPlayer = document.getElementById('soundcloud_player');
-                soundCloudPlayer.src = https://w.soundcloud.com/player/?url=${encodeURIComponent(randomTrackUrl)}&auto_play=true&hide_related=false&show_comments=false&show_user=false&show_reposts=false&visual=false;
+                soundCloudPlayer.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(randomTrackUrl)}&auto_play=true&hide_related=false&show_comments=false&show_user=false&show_reposts=false&visual=false`;
+                soundCloudPlayer.style.display = 'block'; // Make sure the player is visible
             });
         });
     </script>
+
 </body>
 </html>
