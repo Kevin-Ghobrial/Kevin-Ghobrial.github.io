@@ -21,15 +21,11 @@
             display: inline-block;
             margin: 10px;
         }
+
         .oval-button:hover {
             background: #FF416C; /* Change background to transparent on hover */
             cursor: pointer;
             color: #333; /* Change text color to dark gray on hover */
-        }
-
-        /* Hide the SoundCloud player */
-        #soundcloud_player {
-            display: none; /* Hide the iframe while keeping it functional */
         }
 
         #play-button {
@@ -42,6 +38,7 @@
             font-size: 16px;
             border-radius: 5px;
         }
+
         #play-button:hover {
             background-color: #333;
             color: #FF416C;
@@ -65,6 +62,7 @@
             <a href="aboutMe.html">About Me</a>
         </div>
     </div>
+
     <center>
     <div id="middle">
         <div id="tagline" class="animated zoomIn" style="animation-delay:1.8s;">
@@ -88,6 +86,7 @@
                 </div>
             </div>
         </section>
+
         <div class="project">
             <h2>AI_HandTracker</h2>
             <div>• Implemented hand detection and landmark tracking using OpenCV, AppleScript, and the Mediapipe library, enabling real-time recognition of hand movements. <br>
@@ -97,6 +96,7 @@
             <a href="ai_handtracker_project.html" target="_blank" class="oval-button">Learn More</a>
             <a href="https://github.com/Kevin-Ghobrial/HandTracker" target="_blank" class="oval-button">OpenSource Code</a>
         </div>
+
         <div class="project">
             <h2>Free Chess.com Game Review bot</h2>
             <div>
@@ -106,6 +106,7 @@
             <a href="project2.html" target="_blank" class="oval-button">Learn More</a>
             <a href="https://github.com/Kevin-Ghobrial/ChessAnalyzer" target="_blank" class="oval-button">OpenSource Code</a>
         </div>
+
         <div class="project">
             <h2>Top Color Tracker</h2>
             <div>
@@ -114,6 +115,7 @@
             </div>
             <a href="project3.html" target="_blank" class="oval-button">Learn More</a>
         </div>
+
         <div class="project">
             <h2>Galactica</h2>
             <div>
@@ -126,11 +128,11 @@
     </div>
 
     <!-- Hidden SoundCloud player -->
-    <iframe id="soundcloud_player" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe>
     <iframe id="soundcloud_player" width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe>
 
     <!-- Play Button -->
     <center><button id="play-button">Play Music</button></center>
+
     <link rel="stylesheet" href="./CSS/portfolio-section.css">
     <script src="./JS/portfolio-section.js"></script>
     <script src="index.js" type="text/javascript"></script>
@@ -142,20 +144,14 @@
                 "https://soundcloud.com/kevin-ghobrial-39582200/no-eye-has-seen"
                 // Add more track URLs here
             ];
+
             // Function to get a random track URL
             function getRandomTrack() {
                 const randomIndex = Math.floor(Math.random() * tracks.length);
                 return tracks[randomIndex];
             }
 
-            // Set the iframe src to a random track
-            const soundCloudPlayer = document.getElementById('soundcloud_player');
-            const randomTrackUrl = getRandomTrack();
-
             document.getElementById('play-button').addEventListener('click', function() {
-                console.log("Playing track:", randomTrackUrl); // Debugging log
-                soundCloudPlayer.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(randomTrackUrl)}&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&visual=true`;
-                soundCloudPlayer.style.display = 'block'; // Make the iframe visible if necessary
                 const randomTrackUrl = getRandomTrack();
                 const soundCloudPlayer = document.getElementById('soundcloud_player');
                 soundCloudPlayer.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(randomTrackUrl)}&auto_play=true&hide_related=false&show_comments=false&show_user=false&show_reposts=false&visual=false`;
