@@ -28,24 +28,12 @@
             color: #333; /* Change text color to dark gray on hover */
         }
 
-        #play-button {
-            margin: 20px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #FF416C;
-            color: white;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 5px;
-        }
-
-        #play-button:hover {
-            background-color: #333;
-            color: #FF416C;
-        }
-
         #soundcloud_player {
-            display: none; /* Hide the iframe */
+            position: absolute;
+            width: 1px; /* Small width to keep it unobtrusive */
+            height: 1px; /* Small height to keep it unobtrusive */
+            opacity: 0;  /* Make it invisible */
+            border: 0;
         }
     </style>
 </head>
@@ -128,10 +116,7 @@
     </div>
 
     <!-- Hidden SoundCloud player -->
-    <iframe id="soundcloud_player" width="0" height="0" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe>
-
-    <!-- Play Button -->
-    <center><button id="play-button">Play Music</button></center>
+    <iframe id="soundcloud_player" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe>
 
     <link rel="stylesheet" href="./CSS/portfolio-section.css">
     <script src="./JS/portfolio-section.js"></script>
@@ -151,12 +136,12 @@
                 return tracks[randomIndex];
             }
 
-            document.getElementById('play-button').addEventListener('click', function() {
-                const randomTrackUrl = getRandomTrack();
-                const soundCloudPlayer = document.getElementById('soundcloud_player');
-                soundCloudPlayer.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(randomTrackUrl)}&auto_play=true&hide_related=false&show_comments=false&show_user=false&show_reposts=false&visual=false`;
-            });
+            // Set the SoundCloud player's src and trigger autoplay
+            const soundCloudPlayer = document.getElementById('soundcloud_player');
+            const randomTrackUrl = getRandomTrack();
+            soundCloudPlayer.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(randomTrackUrl)}&auto_play=true&hide_related=false&show_comments=false&show_user=false&show_reposts=false&visual=false`;
         });
     </script>
 </body>
 </html>
+
