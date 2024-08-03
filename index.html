@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="index.css">
     <style>
         .oval-button {
-            border-radius: 20px; /* Adjust the value as needed */
+            border-radius: 20px;
             background-color: #333;
             color: #FF416C;
             padding: 10px 20px;
@@ -23,19 +23,18 @@
         }
 
         .oval-button:hover {
-            background: #FF416C; /* Change background to transparent on hover */
+            background: #FF416C;
             cursor: pointer;
-            color: #333; /* Change text color to dark gray on hover */
+            color: #333;
         }
 
         #play-button {
-            margin: 20px;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border: none;
             background-color: #FF416C;
             color: white;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 20px;
             border-radius: 5px;
         }
 
@@ -45,22 +44,30 @@
         }
 
         #soundcloud_player {
-            display: none; /* Hide the iframe */
+            display: none;
         }
 
         #header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        #title-container {
+            margin-bottom: 20px;
         }
 
         #title {
-            font-size: 24px;
+            font-size: 36px;
             font-weight: bold;
         }
 
+        #links {
+            margin-top: 10px;
+        }
+
         #links a {
+            font-size: 14px;
             margin: 0 10px;
         }
     </style>
@@ -70,13 +77,15 @@
         <div id="spinner"></div>
     </div>
     <div id="header" class="animated slideInDown" style="animation-delay:1.8s;">
-        <div id="title">Kevin Ghobrial</div>
-        <button id="play-button">Play Music</button>
+        <div id="title-container">
+            <div id="title">Kevin Ghobrial</div>
+            <button id="play-button">Play Music</button>
+        </div>
         <div id="links">
-            <a href="KevinGhobrialResume.pdf" target="_blank">Resume</a>
-            <a href="#work" style="margin:0px 60px;">Projects</a>
-            <a href="mailto:kghobrial@icloud.com">Contact</a>
-            <a href="aboutMe.html">About Me</a>
+            <a href="KevinGhobrialResume.pdf" target="_blank" class="oval-button">Resume</a>
+            <a href="#work" class="oval-button">Projects</a>
+            <a href="mailto:kghobrial@icloud.com" class="oval-button">Contact</a>
+            <a href="aboutMe.html" class="oval-button">About Me</a>
         </div>
     </div>
 
@@ -174,3 +183,4 @@
     </script>
 </body>
 </html>
+
