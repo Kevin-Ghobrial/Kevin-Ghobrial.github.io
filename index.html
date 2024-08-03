@@ -121,23 +121,26 @@
     <script src="./JS/portfolio-section.js"></script>
     <script src="index.js" type="text/javascript"></script>
     <script>
-        // SoundCloud track URLs
-        const tracks = [
-            "https://soundcloud.com/kevin-ghobrial-39582200/father-god",
-            "https://soundcloud.com/kevin-ghobrial-39582200/no-eye-has-seen"
-        
-            // Add more track URLs here
-        ];
+        document.addEventListener("DOMContentLoaded", function() {
+            // SoundCloud track URLs
+            const tracks = [
+                "https://soundcloud.com/kevin-ghobrial-39582200/father-god",
+                "https://soundcloud.com/kevin-ghobrial-39582200/no-eye-has-seen"
+                // Add more track URLs here
+            ];
 
-        // Function to get a random track URL
-        function getRandomTrack() {
-            const randomIndex = Math.floor(Math.random() * tracks.length);
-            return tracks[randomIndex];
-        }
+            // Function to get a random track URL
+            function getRandomTrack() {
+                const randomIndex = Math.floor(Math.random() * tracks.length);
+                return tracks[randomIndex];
+            }
 
-        // Set the iframe src to a random track
-        const soundCloudPlayer = document.getElementById('soundcloud_player');
-        soundCloudPlayer.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(getRandomTrack())}&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
+            // Set the iframe src to a random track
+            const soundCloudPlayer = document.getElementById('soundcloud_player');
+            const randomTrackUrl = getRandomTrack();
+            console.log("Playing track:", randomTrackUrl); // Debugging log
+            soundCloudPlayer.src = `https://w.soundcloud.com/player/?url=${encodeURIComponent(randomTrackUrl)}&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`;
+        });
     </script>
 </body>
 </html>
