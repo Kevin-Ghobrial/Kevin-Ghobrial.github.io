@@ -9,88 +9,77 @@
     <!-- Load the QnA model -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
     <style>
-        #chatbot-container {
-            width: 300px;
-            margin: 0 auto;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        #chatbox {
-            height: 200px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-        #userInput {
-            width: calc(100% - 70px);
-            padding: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            width: 60px;
-            padding: 5px;
-            border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .loading {
+        #loading-container {
             display: none;
-            color: #007bff;
-            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        #loading-bar {
+            width: 100%;
+            background-color: #f3f3f3;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            position: relative;
+            height: 20px;
+        }
+        
+        #loading-progress {
+            width: 0;
+            height: 100%;
+            background-color: #4caf50;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: width 0.4s ease;
+        }
+        
+        #chatbot-container {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Kevin's Chatbot</h1>
+    <div id="loading-container">
+        <p>Loading model, please wait...</p>
+        <div id="loading-bar">
+            <div id="loading-progress"></div>
+        </div>
+    </div>
     <div id="chatbot-container">
         <div id="chatbox"></div>
         <input type="text" id="userInput" placeholder="Ask something...">
         <button onclick="getResponse()">Send</button>
-        <div id="loading" class="loading">Loading model...</div>
     </div>
 
     <script>
         let model;
         
-        // Load the model and show loading indicator
-        async function loadModel() {
-            document.getElementById("loading").style.display = 'block';
-            try {
-                model = await qna.load();
-            } catch (error) {
-                console.error("Error loading model:", error);
-            } finally {
-                document.getElementById("loading").style.display = 'none';
-            }
-        }
-        
-        loadModel();
+        // Show loading screen
+        document.getElementById("loading-container").style.display = "block";
+
+        // Load the model
+        qna.load().then(loadedModel => {
+            model = loadedModel;
+            // Hide loading screen and show chatbot container
+            document.getElementById("loading-container").style.display = "none";
+            document.getElementById("chatbot-container").style.display = "block";
+        });
 
         async function getResponse() {
             const userInput = document.getElementById("userInput").value;
             const chatbox = document.getElementById("chatbox");
 
             const passage = "Kevin Ghobrial is a highly talented software engineer with extensive experience in various fields, including AI, web development, and embedded systems. His projects, such as the AI_HandTracker and the Free Chess.com Game Review bot, showcase his innovative approach and technical expertise.";
-
+            
             if (model) {
-                try {
-                    const answers = await model.findAnswers(userInput, passage);
-                    if (answers.length > 0) {
-                        chatbox.innerHTML += `<p>Bot: ${answers[0].text}</p>`;
-                    } else {
-                        chatbox.innerHTML += `<p>Bot: Sorry, I don't have an answer for that.</p>`;
-                    }
-                } catch (error) {
-                    console.error("Error during prediction:", error);
-                    chatbox.innerHTML += `<p>Bot: An error occurred. Please try again.</p>`;
+                const answers = await model.findAnswers(userInput, passage);
+                if (answers.length > 0) {
+                    chatbox.innerHTML += `<p>Bot: ${answers[0].text}</p>`;
+                } else {
+                    chatbox.innerHTML += `<p>Bot: Sorry, I don't have an answer for that.</p>`;
                 }
             } else {
                 chatbox.innerHTML += `<p>Bot: The model is still loading, please wait a moment.</p>`;
@@ -98,9 +87,6 @@
 
             // Clear the input field
             document.getElementById("userInput").value = "";
-
-            // Scroll to the bottom of the chatbox
-            chatbox.scrollTop = chatbox.scrollHeight;
         }
     </script>
 </body>
