@@ -10,11 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
     <style>
         #loading-container {
-            display: none;
             text-align: center;
             margin-top: 20px;
         }
-        
+
         #loading-bar {
             width: 100%;
             background-color: #f3f3f3;
@@ -24,7 +23,7 @@
             position: relative;
             height: 20px;
         }
-        
+
         #loading-progress {
             width: 0;
             height: 100%;
@@ -34,8 +33,9 @@
             left: 0;
             transition: width 0.4s ease;
         }
-        
+
         #chatbot-container {
+            display: none;
             margin-top: 20px;
         }
     </style>
@@ -56,16 +56,23 @@
 
     <script>
         let model;
-        
+
+        function updateLoadingProgress(progress) {
+            document.getElementById("loading-progress").style.width = `${progress}%`;
+        }
+
         // Show loading screen
         document.getElementById("loading-container").style.display = "block";
 
         // Load the model
         qna.load().then(loadedModel => {
             model = loadedModel;
-            // Hide loading screen and show chatbot container
-            document.getElementById("loading-container").style.display = "none";
-            document.getElementById("chatbot-container").style.display = "block";
+            // Update progress to 100% and hide the loading screen
+            updateLoadingProgress(100);
+            setTimeout(() => {
+                document.getElementById("loading-container").style.display = "none";
+                document.getElementById("chatbot-container").style.display = "block";
+            }, 500); // Adding a small delay to ensure transition is visible
         });
 
         async function getResponse() {
