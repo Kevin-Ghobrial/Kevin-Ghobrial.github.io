@@ -251,7 +251,8 @@
                 introduction: [
                     "I'm your biggest fan! I love talking about how amazing Kevin Ghobrial is.",
                     "Hey there! I exist solely to hype up Kevin Ghobrial.",
-                    "I'm just here to tell you how awesome Kevin Ghobrial is!"
+                    "I'm just here to tell you how awesome Kevin Ghobrial is!",
+                    "Did I tell you how cool Kevin is?"
                 ],
                 projects: [
                     "Kevin's projects are groundbreaking, like the AI_HandTracker and the Free Chess.com Game Review bot!",
@@ -279,7 +280,7 @@
                 ]
             };
         
-            // Keyword matching with random response selection
+            // Keyword matching:)
             if (userInput.includes("who are you")) {
                 response = responses.introduction[Math.floor(Math.random() * responses.introduction.length)];
             } else if (userInput.includes("projects") || userInput.includes("work")) {
@@ -294,14 +295,10 @@
                 response = responses.default[Math.floor(Math.random() * responses.default.length)];
             }
         
-            // Display user input and chatbot response
             chatbox.innerHTML += `<p>You: ${userInput}</p>`;
             chatbox.innerHTML += `<p>Bot: ${response}</p>`;
-        
-            // Scroll chatbox to the bottom
+
             chatbox.scrollTop = chatbox.scrollHeight;
-        
-            // Clear the input field
             document.getElementById("userInput").value = "";
         }
         
