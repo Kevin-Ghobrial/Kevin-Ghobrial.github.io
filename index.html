@@ -51,31 +51,44 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 300px;
-            background-color: #f1f1f1;
-            border: 2px solid #333;
+            width: 250px; /* Reduced width */
+            background-color: #333; /* Dark gray background */
+            border: 2px solid #FF416C; /* Hot pink border */
             border-radius: 10px;
             padding: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: #FF416C; /* Hot pink text */
+        }
+        
+        #chatbot-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #FF416C; /* Hot pink text */
         }
         
         #chatbox {
-            height: 200px;
+            height: 150px; /* Reduced height */
             overflow-y: scroll;
-            border-bottom: 1px solid #ccc;
+            border-bottom: 1px solid #FF416C; /* Hot pink border */
             padding-bottom: 10px;
             margin-bottom: 10px;
+            background-color: #444; /* Slightly lighter dark gray for the chatbox background */
+            color: #FF416C; /* Hot pink text */
         }
         
         #userInput {
-            width: 80%;
+            width: 70%; /* Adjusted width to fit smaller box */
             padding: 5px;
-            border: 1px solid #ccc;
+            border: 1px solid #FF416C; /* Hot pink border */
             border-radius: 5px;
+            background-color: #555; /* Dark gray input background */
+            color: #FF416C; /* Hot pink text */
         }
         
         #chatbot-container button {
-            width: 18%;
+            width: 25%; /* Adjusted width to fit smaller box */
             padding: 5px;
             background-color: #FF416C;
             color: white;
@@ -85,9 +98,10 @@
         }
         
         #chatbot-container button:hover {
-            background-color: #333;
-            color: #FF416C;
+            background-color: #FF416C; /* Keep button background hot pink */
+            color: #333; /* Change text color to dark gray on hover */
         }
+
     </style>
 </head>
 <body>
@@ -118,6 +132,7 @@
     </div>
 
     <div id="chatbot-container">
+        <div id="chatbot-title">Kevin's Chat Bot (Not biased at all)</div>
         <div id="chatbox">
             <!-- Chat messages will go here -->
         </div>
