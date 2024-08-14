@@ -4,50 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kevin's Chatbot</title>
-    <!-- Load TensorFlow.js -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <!-- Load the QnA model -->
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
     <style>
-        #loading-container {
+        #loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
             text-align: center;
-            margin-top: 20px;
+            padding-top: 20%;
         }
 
         #loading-bar {
-            width: 100%;
-            background-color: #f3f3f3;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            overflow: hidden;
+            width: 50%;
+            height: 30px;
+            background-color: #444;
+            margin: 0 auto;
             position: relative;
-            height: 20px;
         }
 
-        #loading-progress {
-            width: 0;
+        #loading-bar span {
+            display: block;
             height: 100%;
-            background-color: #4caf50;
+            background-color: #FF416C;
+            width: 0;
             position: absolute;
             top: 0;
             left: 0;
-            transition: width 0.4s ease;
-        }
-
-        #chatbot-container {
-            display: none;
-            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>Kevin's Chatbot</h1>
-    <div id="loading-container">
-        <p>Loading model, please wait...</p>
+    <div id="loading">
         <div id="loading-bar">
-            <div id="loading-progress"></div>
+            <span id="loading-bar-progress"></span>
         </div>
+        Loading model...
     </div>
+    <h1>Kevin's Chatbot</h1>
     <div id="chatbot-container">
         <div id="chatbox"></div>
         <input type="text" id="userInput" placeholder="Ask something...">
@@ -56,40 +55,49 @@
 
     <script>
         let model;
+        const loadingBar = document.getElementById("loading-bar-progress");
+        const loadingDiv = document.getElementById("loading");
 
-        function updateLoadingProgress(progress) {
-            document.getElementById("loading-progress").style.width = `${progress}%`;
+        // Function to update the loading bar
+        function updateLoadingBar(progress) {
+            loadingBar.style.width = progress + "%";
         }
 
-        // Show loading screen
-        document.getElementById("loading-container").style.display = "block";
-
         // Load the model
-        qna.load().then(loadedModel => {
-            model = loadedModel;
-            // Update progress to 100% and hide the loading screen
-            updateLoadingProgress(100);
-            setTimeout(() => {
-                document.getElementById("loading-container").style.display = "none";
-                document.getElementById("chatbot-container").style.display = "block";
-            }, 500); // Adding a small delay to ensure transition is visible
-        });
+        async function loadModel() {
+            loadingDiv.style.display = 'block'; // Show loading indicator
+            try {
+                model = await qna.load();
+                updateLoadingBar(100); // Complete loading bar
+                loadingDiv.style.display = 'none'; // Hide loading indicator
+            } catch (error) {
+                console.error("Error loading the model:", error);
+                loadingDiv.innerHTML = "Failed to load model.";
+            }
+        }
+
+        loadModel();
 
         async function getResponse() {
             const userInput = document.getElementById("userInput").value;
             const chatbox = document.getElementById("chatbox");
-
             const passage = "Kevin Ghobrial is a highly talented software engineer with extensive experience in various fields, including AI, web development, and embedded systems. His projects, such as the AI_HandTracker and the Free Chess.com Game Review bot, showcase his innovative approach and technical expertise.";
-            
-            if (model) {
+
+            if (!model) {
+                chatbox.innerHTML += `<p>Bot: The model is still loading, please wait a moment.</p>`;
+                return;
+            }
+
+            try {
                 const answers = await model.findAnswers(userInput, passage);
                 if (answers.length > 0) {
                     chatbox.innerHTML += `<p>Bot: ${answers[0].text}</p>`;
                 } else {
                     chatbox.innerHTML += `<p>Bot: Sorry, I don't have an answer for that.</p>`;
                 }
-            } else {
-                chatbox.innerHTML += `<p>Bot: The model is still loading, please wait a moment.</p>`;
+            } catch (error) {
+                console.error("Error getting response:", error);
+                chatbox.innerHTML += `<p>Bot: Sorry, there was an error processing your request.</p>`;
             }
 
             // Clear the input field
