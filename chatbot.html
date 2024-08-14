@@ -5,9 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kevin's Chatbot</title>
     <!-- Load TensorFlow.js -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
     <!-- Load the QnA model -->
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
+    <style>
+        #chatbot-container {
+            width: 300px;
+            margin: 0 auto;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #chatbox {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        #userInput {
+            width: calc(100% - 70px);
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 60px;
+            padding: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .loading {
+            display: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
     <h1>Kevin's Chatbot</h1>
@@ -15,28 +54,43 @@
         <div id="chatbox"></div>
         <input type="text" id="userInput" placeholder="Ask something...">
         <button onclick="getResponse()">Send</button>
+        <div id="loading" class="loading">Loading model...</div>
     </div>
 
     <script>
         let model;
         
-        // Load the model
-        qna.load().then(loadedModel => {
-            model = loadedModel;
-        });
+        // Load the model and show loading indicator
+        async function loadModel() {
+            document.getElementById("loading").style.display = 'block';
+            try {
+                model = await qna.load();
+            } catch (error) {
+                console.error("Error loading model:", error);
+            } finally {
+                document.getElementById("loading").style.display = 'none';
+            }
+        }
+        
+        loadModel();
 
         async function getResponse() {
             const userInput = document.getElementById("userInput").value;
             const chatbox = document.getElementById("chatbox");
 
             const passage = "Kevin Ghobrial is a highly talented software engineer with extensive experience in various fields, including AI, web development, and embedded systems. His projects, such as the AI_HandTracker and the Free Chess.com Game Review bot, showcase his innovative approach and technical expertise.";
-            
+
             if (model) {
-                const answers = await model.findAnswers(userInput, passage);
-                if (answers.length > 0) {
-                    chatbox.innerHTML += `<p>Bot: ${answers[0].text}</p>`;
-                } else {
-                    chatbox.innerHTML += `<p>Bot: Sorry, I don't have an answer for that.</p>`;
+                try {
+                    const answers = await model.findAnswers(userInput, passage);
+                    if (answers.length > 0) {
+                        chatbox.innerHTML += `<p>Bot: ${answers[0].text}</p>`;
+                    } else {
+                        chatbox.innerHTML += `<p>Bot: Sorry, I don't have an answer for that.</p>`;
+                    }
+                } catch (error) {
+                    console.error("Error during prediction:", error);
+                    chatbox.innerHTML += `<p>Bot: An error occurred. Please try again.</p>`;
                 }
             } else {
                 chatbox.innerHTML += `<p>Bot: The model is still loading, please wait a moment.</p>`;
@@ -44,7 +98,11 @@
 
             // Clear the input field
             document.getElementById("userInput").value = "";
+
+            // Scroll to the bottom of the chatbox
+            chatbox.scrollTop = chatbox.scrollHeight;
         }
     </script>
 </body>
 </html>
+
