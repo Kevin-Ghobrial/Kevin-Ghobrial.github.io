@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kevin's Chatbot</title>
+    <!-- Load TensorFlow.js -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"> </script>
+    <!-- Load the QnA model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"> </script>
+</head>
+<body>
+    <h1>Kevin's Chatbot</h1>
+    <div id="chatbot-container">
+        <div id="chatbox"></div>
+        <input type="text" id="userInput" placeholder="Ask something...">
+        <button onclick="getResponse()">Send</button>
+    </div>
+
+    <script>
+        let model;
+        
+        // Load the model
+        qna.load().then(loadedModel => {
+            model = loadedModel;
+        });
+
+        async function getResponse() {
+            const userInput = document.getElementById("userInput").value;
+            const chatbox = document.getElementById("chatbox");
+
+            const passage = "Kevin Ghobrial is a highly talented software engineer with extensive experience in various fields, including AI, web development, and embedded systems. His projects, such as the AI_HandTracker and the Free Chess.com Game Review bot, showcase his innovative approach and technical expertise.";
+            
+            if (model) {
+                const answers = await model.findAnswers(userInput, passage);
+                if (answers.length > 0) {
+                    chatbox.innerHTML += `<p>Bot: ${answers[0].text}</p>`;
+                } else {
+                    chatbox.innerHTML += `<p>Bot: Sorry, I don't have an answer for that.</p>`;
+                }
+            } else {
+                chatbox.innerHTML += `<p>Bot: The model is still loading, please wait a moment.</p>`;
+            }
+
+            // Clear the input field
+            document.getElementById("userInput").value = "";
+        }
+    </script>
+</body>
+</html>
