@@ -47,6 +47,47 @@
         #soundcloud_player {
             display: none; /* Hide the iframe */
         }
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background-color: #f1f1f1;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        #chatbox {
+            height: 200px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        
+        #userInput {
+            width: 80%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        
+        #chatbot-container button {
+            width: 18%;
+            padding: 5px;
+            background-color: #FF416C;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #chatbot-container button:hover {
+            background-color: #333;
+            color: #FF416C;
+        }
     </style>
 </head>
 <body>
@@ -75,6 +116,15 @@
             </div>
         </div>
     </div>
+
+    <div id="chatbot-container">
+        <div id="chatbox">
+            <!-- Chat messages will go here -->
+        </div>
+        <input type="text" id="userInput" placeholder="Ask me anything..." />
+        <button onclick="getResponse()">Send</button>
+    </div>
+
     </center>
          
     <div id="work">
@@ -174,7 +224,35 @@
                 }
             });
         });
-
+        
+        function getResponse() {
+            const userInput = document.getElementById("userInput").value.toLowerCase();
+            const chatbox = document.getElementById("chatbox");
+        
+            let response = "";
+        
+            //KeyWord matching :)
+            if (userInput.includes("who are you")) {
+                response = "I'm your biggest fan! I love talking about how amazing Kevin Ghobrial is.";
+            } else if (userInput.includes("projects") || userInput.includes("work")) {
+                response = "Kevin's projects are groundbreaking, like the AI_HandTracker and the Free Chess.com Game Review bot!";
+            } else if (userInput.includes("skills")) {
+                response = "Kevin is a genius with technology, excelling in everything from MIPS Assembly to OpenCV!";
+            } else {
+                response = "You're talking to the best of the best! Kevin Ghobrial is truly exceptional.";
+            }
+        
+            // Display user input and chatbot response
+            chatbox.innerHTML += `<p>You: ${userInput}</p>`;
+            chatbox.innerHTML += `<p>Bot: ${response}</p>`;
+        
+            // Scroll chatbox to the bottom
+            chatbox.scrollTop = chatbox.scrollHeight;
+        
+            // Clear the input field
+            document.getElementById("userInput").value = "";
+        }
+        
 
     </script>
 
