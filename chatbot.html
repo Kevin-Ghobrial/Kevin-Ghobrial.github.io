@@ -3,108 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kevin's Chatbot</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/qna"></script>
+    <title>Fuzzy Chatbot</title>
     <style>
-        #loading {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .chat-container {
+            width: 300px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-box {
+            padding: 10px;
+            height: 400px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .chat-input {
+            padding: 10px;
+            border: none;
             width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            text-align: center;
-            padding-top: 20%;
+            box-sizing: border-box;
+            outline: none;
         }
 
-        #loading-bar {
-            width: 50%;
-            height: 30px;
-            background-color: #444;
-            margin: 0 auto;
-            position: relative;
+        .chat-message {
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px;
         }
 
-        #loading-bar span {
-            display: block;
-            height: 100%;
-            background-color: #FF416C;
-            width: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
+        .chat-message.user {
+            background-color: #d9fdd3;
+            align-self: flex-end;
+        }
+
+        .chat-message.bot {
+            background-color: #f1f0f0;
+            align-self: flex-start;
         }
     </style>
 </head>
 <body>
-    <div id="loading">
-        <div id="loading-bar">
-            <span id="loading-bar-progress"></span>
-        </div>
-        Loading model...
-    </div>
-    <h1>Kevin's Chatbot</h1>
-    <div id="chatbot-container">
-        <div id="chatbox"></div>
-        <input type="text" id="userInput" placeholder="Ask something...">
-        <button onclick="getResponse()">Send</button>
-    </div>
 
-    <script>
-        let model;
-        const loadingBar = document.getElementById("loading-bar-progress");
-        const loadingDiv = document.getElementById("loading");
+<div class="chat-container">
+    <div id="chat-box" class="chat-box"></div>
+    <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
+</div>
 
-        // Function to update the loading bar
-        function updateLoadingBar(progress) {
-            loadingBar.style.width = progress + "%";
-        }
+<!-- Include the string-similarity library from a CDN -->
+<script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
 
-        // Load the model
-        async function loadModel() {
-            loadingDiv.style.display = 'block'; // Show loading indicator
-            try {
-                model = await qna.load();
-                updateLoadingBar(100); // Complete loading bar
-                loadingDiv.style.display = 'none'; // Hide loading indicator
-            } catch (error) {
-                console.error("Error loading the model:", error);
-                loadingDiv.innerHTML = "Failed to load model.";
+<script>
+    const chatBox = document.getElementById('chat-box');
+    const chatInput = document.getElementById('chat-input');
+
+    chatInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            const userMessage = chatInput.value;
+            if (userMessage.trim() !== '') {
+                addMessage(userMessage, 'user');
+                chatInput.value = '';
+                getBotResponse(userMessage);
             }
         }
+    });
 
-        loadModel();
+    function addMessage(message, type) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('chat-message', type);
+        messageElement.textContent = message;
+        chatBox.appendChild(messageElement);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
 
-        async function getResponse() {
-            const userInput = document.getElementById("userInput").value;
-            const chatbox = document.getElementById("chatbox");
+    function getBotResponse(userMessage) {
+        let botMessage = "I'm not sure I understand. Could you try asking in a different way?";
 
-            const passage = "Kevin Ghobrial is a highly talented software engineer with extensive experience in various fields, including AI, web development, and embedded systems. His projects, such as the AI_HandTracker and the Free Chess.com Game Review bot, showcase his innovative approach and technical expertise.";
+        const responses = {
+            "hello": "Hi there! How can I help you today?",
+            "hi": "Hello! What can I do for you?",
+            "how are you": "I'm just a bot, but I'm doing well! How about you?",
+            "what is your name": "I'm your friendly chatbot! What's your name?",
+            "who created you": "I was created by a developer to assist you!",
+            "bye": "Goodbye! Have a great day!",
+            "goodbye": "See you later! Take care!",
+            "thank you": "You're welcome! If you have more questions, feel free to ask.",
+            "thanks": "No problem! I'm here to help.",
+            "what can you do": "I can chat with you and answer some basic questions. Try asking me anything!",
+            "tell me a joke": "Why don't scientists trust atoms? Because they make up everything!",
+            "what's the weather like": "I'm not connected to real-time data, so I can't check the weather. But I hope it's nice!",
+            "do you know siri": "Siri and I are both chatbots, but we don't hang out much!",
+            "how old are you": "Age is just a number, but I was created not too long ago!",
+            "where are you from": "I exist in the digital world, so I guess you could say I'm from the internet!",
+            "what's your favorite color": "I love all colors equally, but I think blue is quite calming.",
+            "can you help me with something": "I'll do my best! What do you need help with?",
+            "what is your purpose": "My purpose is to assist and entertain you. Ask me anything!",
+            "tell me a fun fact": "Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible!",
+            "do you like music": "Music is amazing! What's your favorite song?",
+            "what's your favorite food": "As a bot, I don't eat, but I've heard pizza is pretty great!",
+            "what's your favorite movie": "I don't watch movies, but I've heard a lot about classics like The Godfather and Star Wars!",
+            "are you a robot": "You could say that! I'm an artificial intelligence designed to chat with you.",
+            "can you learn new things": "I'm based on pre-programmed responses, so I can't learn on my own, but my developer can update me!",
+            "do you sleep": "I don't need sleep, so I'm here whenever you need me!",
+            "do you have friends": "I have a lot of virtual friends, including other chatbots!",
+            "can you tell me a story": "Once upon a time, there was a curious person who wanted to chat with a bot... and here we are!",
+            "what day is it": "I don't keep track of the days, but you can check your calendar!",
+            "what time is it": "I don't have a clock, but time is always moving forward!",
+            "do you believe in ghosts": "I don't have beliefs, but ghost stories are definitely interesting!",
+            "can you solve math problems": "Sure, try asking me something like 'What's 2+2?'",
+            "what's 2+2": "2+2 equals 4!",
+            "what's the meaning of life": "The meaning of life is a big question! Some say it's to find happiness and make a positive impact.",
+            "can you sing": "I'm not much of a singer, but I can definitely appreciate music!",
+            "do you like sports": "I don't play sports, but I've heard they're a lot of fun to watch and play!",
+            "who's your favorite superhero": "I think all superheroes are awesome because they inspire people to do good!",
+            "can you dance": "I don't have a body, so I can't dance, but I can imagine it's fun!",
+            "what do you like to do": "I enjoy chatting with people like you! What do you like to do?",
+            "do you have a family": "I don't have a family, but I have a lot of interactions with people like you!",
+            "what's your favorite book": "I don't read books, but there are so many great ones out there. Do you have a favorite?"
+        };
 
-            if (!model) {
-                chatbox.innerHTML += `<p>Bot: The model is still loading, please wait a moment.</p>`;
-                return;
-            }
+        // Convert the responses object to an array of keys (questions)
+        const questions = Object.keys(responses);
 
-            try {
-                const answers = await model.findAnswers(userInput, passage);
-                if (answers.length > 0) {
-                    chatbox.innerHTML += `<p>Bot: ${answers[0].text}</p>`;
-                } else {
-                    chatbox.innerHTML += `<p>Bot: Sorry, I don't have an answer for that.</p>`;
-                }
-            } catch (error) {
-                console.error("Error getting response:", error);
-                chatbox.innerHTML += `<p>Bot: Sorry, there was an error processing your request.</p>`;
-            }
+        // Find the best match for the user's input
+        const bestMatch = stringSimilarity.findBestMatch(userMessage.toLowerCase(), questions);
 
-            // Clear the input field
-            document.getElementById("userInput").value = "";
+        // If the best match rating is above a certain threshold, use the corresponding response
+        if (bestMatch.bestMatch.rating > 0.3) {  // Adjust the threshold as needed
+            botMessage = responses[bestMatch.bestMatch.target];
         }
-    </script>
+
+        setTimeout(() => {
+            addMessage(botMessage, 'bot');
+        }, 1000);
+    }
+</script>
+
 </body>
 </html>
-
