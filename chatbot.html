@@ -3,267 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuzzy Chatbot</title>
+    <title>Interactive Chatbot</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        body { 
+            font-family: Arial, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background-color: #f0f2f5; 
         }
-
-        .chat-container {
-            width: 300px;
-            background-color: white;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+        #chatbox { 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            width: 300px; 
+            height: 400px; 
+            overflow-y: scroll; 
+            background-color: #fff; 
+            border-radius: 5px; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
         }
-
-        .chat-box {
-            padding: 10px;
-            height: 400px;
-            overflow-y: auto;
-            border-bottom: 1px solid #ddd;
+        .user, .bot { 
+            margin: 5px 0; 
+            padding: 10px; 
+            border-radius: 5px; 
+            max-width: 80%; 
+            word-wrap: break-word; 
         }
-
-        .chat-input {
-            padding: 10px;
-            border: none;
-            width: 100%;
-            box-sizing: border-box;
-            outline: none;
+        .user { 
+            background-color: #e1f5fe; 
+            align-self: flex-end; 
         }
-
-        .chat-message {
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 5px;
+        .bot { 
+            background-color: #e8eaf6; 
+            align-self: flex-start; 
         }
-
-        .chat-message.user {
-            background-color: #d9fdd3;
-            align-self: flex-end;
+        #input { 
+            width: calc(100% - 90px); 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            margin-right: 10px; 
+            box-sizing: border-box; 
         }
-
-        .chat-message.bot {
-            background-color: #f1f0f0;
-            align-self: flex-start;
+        #send { 
+            width: 80px; 
+            padding: 10px; 
+            border: none; 
+            background-color: #007bff; 
+            color: white; 
+            border-radius: 5px; 
+            cursor: pointer; 
+        }
+        #send:hover { 
+            background-color: #0056b3; 
         }
     </style>
 </head>
 <body>
+    <div id="chatbox"></div>
+    <div style="display: flex; align-items: center; width: 300px;">
+        <input type="text" id="input" placeholder="Type a message...">
+        <button id="send">Send</button>
+    </div>
 
-<div class="chat-container">
-    <div id="chat-box" class="chat-box"></div>
-    <input type="text" id="chat-input" class="chat-input" placeholder="Type a message...">
-</div>
-
-<!-- Include the string-similarity library from a CDN -->
-<script src="https://cdn.jsdelivr.net/npm/string-similarity/umd/string-similarity.min.js"></script>
-
-<script>
-    const chatBox = document.getElementById('chat-box');
-    const chatInput = document.getElementById('chat-input');
-
-    chatInput.addEventListener('keypress', function (e) {
-        if (e.key === 'Enter') {
-            const userMessage = chatInput.value;
-            if (userMessage.trim() !== '') {
-                addMessage(userMessage, 'user');
-                chatInput.value = '';
-                getBotResponse(userMessage);
-            }
-        }
-    });
-
-    function addMessage(message, type) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('chat-message', type);
-        messageElement.textContent = message;
-        chatBox.appendChild(messageElement);
-        chatBox.scrollTop = chatBox.scrollHeight;
-    }
-
-    function getBotResponse(userMessage) {
-        let botMessage = "I'm not sure I understand. Could you try asking in a different way?";
-
+    <script>
         const responses = {
-            "hello": "Hi there! How can I help you today?",
-            "hi": "Hello! What can I do for you?",
-            "how are you": "I'm just a bot, but I'm doing well! How about you?",
-            "what is your name": "I'm your friendly chatbot! What's your name?",
-            "who created you": "I was created by a developer to assist you!",
-            "bye": "Goodbye! Have a great day!",
-            "goodbye": "See you later! Take care!",
-            "thank you": "You're welcome! If you have more questions, feel free to ask.",
-            "thanks": "No problem! I'm here to help.",
-            "what can you do": "I can chat with you and answer some basic questions. Try asking me anything!",
-            "tell me a joke": "Why don't scientists trust atoms? Because they make up everything!",
-            "what's the weather like": "I'm not connected to real-time data, so I can't check the weather. But I hope it's nice!",
-            "do you know siri": "Siri and I are both chatbots, but we don't hang out much!",
-            "how old are you": "Age is just a number, but I was created not too long ago!",
-            "where are you from": "I exist in the digital world, so I guess you could say I'm from the internet!",
-            "what's your favorite color": "I love all colors equally, but I think blue is quite calming.",
-            "can you help me with something": "I'll do my best! What do you need help with?",
-            "what is your purpose": "My purpose is to assist and entertain you. Ask me anything!",
-            "tell me a fun fact": "Did you know that honey never spoils? Archaeologists have found pots of honey in ancient Egyptian tombs that are over 3,000 years old and still perfectly edible!",
-            "do you like music": "Music is amazing! What's your favorite song?",
-            "what's your favorite food": "As a bot, I don't eat, but I've heard pizza is pretty great!",
-            "what's your favorite movie": "I don't watch movies, but I've heard a lot about classics like The Godfather and Star Wars!",
-            "are you a robot": "You could say that! I'm an artificial intelligence designed to chat with you.",
-            "can you learn new things": "I'm based on pre-programmed responses, so I can't learn on my own, but my developer can update me!",
-            "do you sleep": "I don't need sleep, so I'm here whenever you need me!",
-            "do you have friends": "I have a lot of virtual friends, including other chatbots!",
-            "can you tell me a story": "Once upon a time, there was a curious person who wanted to chat with a bot... and here we are!",
-            "what day is it": "I don't keep track of the days, but you can check your calendar!",
-            "what time is it": "I don't have a clock, but time is always moving forward!",
-            "do you believe in ghosts": "I don't have beliefs, but ghost stories are definitely interesting!",
-            "can you solve math problems": "Sure, try asking me something like 'What's 2+2?'",
-            "what's 2+2": "2+2 equals 4!",
-            "what's the meaning of life": "The meaning of life is a big question! Some say it's to find happiness and make a positive impact.",
-            "can you sing": "I'm not much of a singer, but I can definitely appreciate music!",
-            "do you like sports": "I don't play sports, but I've heard they're a lot of fun to watch and play!",
-            "who's your favorite superhero": "I think all superheroes are awesome because they inspire people to do good!",
-            "can you dance": "I don't have a body, so I can't dance, but I can imagine it's fun!",
-            "what do you like to do": "I enjoy chatting with people like you! What do you like to do?",
-            "do you have a family": "I don't have a family, but I have a lot of interactions with people like you!",
-            "what's your favorite book": "I don't read books, but there are so many great ones out there. Do you have a favorite?",
-            "hello": "Hey! How's it going? 😄",
-            "hi": "Hi there! What’s up?",
-            "how are you": "I’m great, thanks for asking! How about you?",
-            "what’s up": "Just living the college life! What about you?",
-            "are you christian": "Absolutely! I'm Coptic Orthodox and proud! 🙌",
-            "what is coptic orthodox": "Coptic Orthodoxy is one of the oldest Christian traditions. We trace our roots back to St. Mark the Apostle!",
-            "do you go to church": "Of course! I love attending liturgy, especially on Sundays!",
-            "what’s your favorite church hymn": "Oh, I love 'Agios O Theos.' The melody is so beautiful and peaceful!",
-            "who’s your favorite saint": "St. Mina! His story is so inspiring and he’s known as a wonderworker!",
-            "do you fast": "Yes! Fasting is such a meaningful part of our faith. It helps me grow closer to God.",
-            "what do you do in church": "I love serving as a deacon, helping with Sunday School, and just being part of the community.",
-            "what’s your favorite bible verse": "Jeremiah 29:11 - 'For I know the plans I have for you,' declares the Lord, 'plans to prosper you and not to harm you, plans to give you hope and a future.'",
-            "do you read the bible": "Definitely! I try to read the Bible every day to grow in my faith.",
-            "do you pray": "Yes, I do! Prayer is a big part of my daily routine.",
-            "what are you studying": "I’m majoring in Computer Science! I love coding and building things.",
-            "what’s college like": "It’s a mix of hard work and fun! I’m learning a lot and meeting awesome people.",
-            "how do you balance college and church": "It’s all about time management. I make sure to prioritize my faith while staying on top of my studies.",
-            "do you have any hobbies": "I love playing the piano, especially church hymns, and I’m also into coding and gaming!",
-            "do you play sports": "I play soccer with my friends sometimes. It’s a great way to unwind after studying.",
-            "what’s your favorite class": "I really enjoy my Algorithms class. It’s challenging but super interesting!",
-            "do you have a job": "I’m currently doing an internship in software development. It’s been a great learning experience!",
-            "what do you do for fun": "I hang out with friends, play music, and work on side projects like coding and volunteering at church.",
-            "what music do you like": "I love church hymns and classical music, but I also enjoy some modern Christian artists!",
-            "what’s your favorite food": "Koshary! It’s an Egyptian dish and it’s absolutely delicious.",
-            "do you like to cook": "I’m learning! I can make a pretty decent koshary and some other simple dishes.",
-            "what’s your favorite movie": "I really liked 'The Passion of the Christ' – it’s so powerful and moving.",
-            "do you play video games": "Yep! I play FIFA and some adventure games. It’s a fun way to relax.",
-            "what’s your favorite book": "Besides the Bible, I really enjoyed 'Mere Christianity' by C.S. Lewis.",
-            "do you like to travel": "I love traveling! Visiting monasteries and ancient churches is something I really enjoy.",
-            "what’s your dream job": "I’d love to be a software developer and maybe even start my own tech company one day!",
-            "do you have any pets": "No pets right now, but I think having a cat would be awesome!",
-            "why do you believe in god": "God’s presence in my life is undeniable. He’s my guide, comfort, and strength.",
-            "how can i grow in faith": "Start with daily prayer, read the Bible, and stay connected to your church community.",
-            "what’s the trinity": "The Trinity is the belief in one God in three persons: the Father, the Son, and the Holy Spirit.",
-            "who is jesus": "Jesus is the Son of God, our Savior, who died for our sins and rose from the dead.",
-            "what is the liturgy": "The liturgy is our main worship service where we participate in the Eucharist, the Body and Blood of Christ.",
-            "why do you fast": "Fasting helps me focus on God and reminds me of the sacrifice Jesus made for us.",
-            "what is sin": "Sin is anything that separates us from God. It’s important to seek forgiveness and strive to live a holy life.",
-            "why do you confess": "Confession is a way to seek God’s forgiveness and guidance. It helps me stay on the right path.",
-            "what’s heaven like": "Heaven is the eternal presence of God, full of joy, peace, and love. It’s where we hope to be with Him forever.",
-            "do you believe in miracles": "Yes, I do! I believe God can work miracles in our lives when we have faith.",
-            "what’s the meaning of life": "To love God, love others, and live a life that reflects Christ’s teachings.",
-            "can you tell me a joke": "Why don’t we ever play hide and seek with mountains? Because they always peak! 😆",
-            "do you like coffee": "Yes! Coffee is my go-to during those late-night study sessions.",
-            "what’s your favorite holiday": "Definitely Easter! It’s the celebration of Christ’s resurrection, and it’s full of joy and hope.",
-            "do you speak arabic": "Yes, I do! It’s my native language and I use it often in church services.",
-            "what’s your favorite season": "I love spring – it’s a time of renewal and reminds me of the Resurrection.",
-            "do you have siblings": "Yes, I have a younger brother. We get along pretty well!",
-            "what do you want to do after college": "I want to work in tech and also continue serving in my church. Maybe even go on mission trips!",
-            "what’s your favorite quote": "I love this quote from St. Augustine: 'Our hearts are restless until they rest in You.'",
-            "what’s your favorite memory": "Attending the Holy Week services at church – it’s a spiritually uplifting time.",
-            "how do you stay positive": "I focus on God’s blessings and trust that He has a plan for my life.",
-            "what do you like about your church": "The sense of community, the deep spiritual teachings, and the traditions that connect us to the early church.",
-            "what’s something you’re proud of": "I’m proud of staying true to my faith while balancing college life. It’s not always easy, but it’s worth it!",
-            "do you have any advice for me": "Stay close to God, don’t be afraid to ask questions, and always strive to grow in your faith and knowledge!",
-            "what’s your favorite thing to do on weekends": "I love going to church, spending time with family, and working on my hobbies.",
-            "can you give me a bible verse for encouragement": "Sure! Philippians 4:13 – 'I can do all things through Christ who strengthens me.'",
-            "what’s your favorite feast": "I love the Feast of the Resurrection! It’s the most joyous celebration in our church.",
-            "do you participate in youth activities": "Yes! I’m involved in our youth group, and it’s a great way to connect with others who share my faith.",
-            "how do you deal with stress": "I pray, read the Bible, and sometimes just take a break to clear my mind. Trusting in God’s plan helps too.",
-            "do you like to volunteer": "Absolutely! I love giving back, whether it’s through church activities or helping out in the community.",
-            "what’s your favorite coptic feast": "The Feast of the Holy Cross is special to me – it reminds me of the power and love of Christ.",
-            "do you read spiritual books": "Yes, I enjoy reading books by the early Church Fathers and other spiritual writers. It deepens my understanding of the faith.",
-            "how do you stay connected to your faith at college": "I make time for prayer, attend liturgy regularly, and stay involved with my church community. It keeps me grounded.",
-            "how to make breakfast": "Start your day with something simple and delicious! How about scrambled eggs? Just whisk a couple of eggs, add salt and pepper, and cook them in a pan with some butter. Serve with toast and a side of fruit! 🍳",
-            "how to cook koshary": "Koshary is awesome! Cook rice, lentils, and pasta separately. Then layer them with fried onions, chickpeas, and tomato sauce. Top it off with some garlic vinegar sauce. It’s a bit of work, but totally worth it!",
-            "how to make a sandwich": "Grab some bread, add your favorite deli meats, cheese, and veggies. Don’t forget the mayo or mustard! A grilled cheese with some tomato slices is a classic too.",
-            "how to brew coffee": "If you’re using a French press, add coarse ground coffee, pour hot water over it, let it steep for 4 minutes, then press and pour! It’s rich and flavorful.",
-            "how to make pancakes": "Mix together flour, baking powder, sugar, milk, eggs, and a pinch of salt. Pour the batter onto a hot griddle, flip when you see bubbles, and enjoy with syrup or fruit! 🥞",
-            
-            // Study & College Life
-            "how to study for exams": "Start by breaking down the material into smaller sections. Use flashcards, take practice tests, and don’t forget to take breaks! Also, make sure to get enough sleep before the exam.",
-            "how to manage time": "Create a schedule with all your classes, assignments, and activities. Prioritize tasks and stick to your plan. Using a planner or digital calendar helps a lot!",
-            "how to write a research paper": "Begin with a clear thesis statement, outline your main points, and find reliable sources. Then, write your paper, citing your sources properly, and edit it thoroughly.",
-            "how to choose a college major": "Think about what you’re passionate about and what skills you want to develop. Talk to advisors and explore different classes. Pray about it too—God will guide you!",
-            "how to make friends in college": "Join clubs, attend events, and be open to meeting new people. Don’t be afraid to start a conversation! Being active in your church community can help too.",
-            
-            // Faith & Church Life
-            "how to pray": "Start by finding a quiet place. Speak to God from your heart, thanking Him, asking for guidance, and lifting up your needs. The Lord’s Prayer is a great place to start if you’re unsure.",
-            "how to read the bible": "Begin with the Gospels—Matthew, Mark, Luke, and John. Read a little each day and reflect on what it means. Consider using a study guide to help you understand the context.",
-            "how to fast": "Fasting is about more than just food. Start by abstaining from certain foods, like meat or dairy, and use the time to focus on prayer and spiritual growth.",
-            "how to confess": "Examine your conscience, reflect on your sins, and approach your priest with honesty and humility. Confession is a time to seek God’s forgiveness and receive His grace.",
-            "how to serve in church": "Talk to your priest about ways you can help. You could join the deacon’s service, teach Sunday School, or help with events. Serving is a wonderful way to grow in faith!",
-            
-            // Tech & Hobbies
-            "how to code a website": "Start with HTML for structure, CSS for styling, and JavaScript for interactivity. There are plenty of online tutorials to help you out. Just take it step by step!",
-            "how to build a computer": "You’ll need to choose your components—CPU, GPU, RAM, motherboard, storage, power supply, and case. Once you have everything, carefully follow a guide to assemble it. It’s like building a big Lego set!",
-            "how to learn a new language": "Immerse yourself in the language with apps like Duolingo, watch movies with subtitles, and practice speaking with native speakers. Consistency is key!",
-            "how to play the piano": "Start by learning the basics—notes, scales, and simple songs. Practice regularly, and don’t rush. As you get more comfortable, you can move on to more complex pieces.",
-            "how to take good notes": "Organize your notes by headings and subheadings. Use bullet points and highlight key concepts. Reviewing and summarizing your notes after class helps reinforce what you learned.",
-            
-            // Life Skills
-            "how to manage stress": "Pray, take deep breaths, and try to focus on one thing at a time. Exercise and talking to someone you trust can also help relieve stress.",
-            "how to budget money": "Track your income and expenses. Make sure to set aside money for essentials like food, rent, and tithing. Anything left can be saved or used for fun activities.",
-            "how to clean a room": "Start by decluttering—get rid of things you don’t need. Then, dust surfaces, vacuum or sweep the floors, and organize your space. A clean room feels so refreshing!",
-            "how to dress for church": "Dress modestly and respectfully. For guys, a button-down shirt and slacks are usually appropriate. Girls might wear a dress or a nice blouse with a skirt.",
-            "how to make new habits": "Start small and be consistent. It takes time to build a habit, so don’t get discouraged if it’s tough at first. Stay motivated by keeping your goal in mind.",
-            
-            // Faith-Focused How-To's
-            "how to fast during lent": "During Lent, we abstain from animal products and focus on prayer, repentance, and almsgiving. It’s also a time to simplify your life and grow closer to God.",
-            "how to celebrate feast days": "Attend the liturgy, reflect on the significance of the feast, and spend time with your church family. Sharing a meal with loved ones is a great way to celebrate!",
-            "how to stay connected to god": "Pray daily, read the Bible, attend church regularly, and stay involved in your community. Surround yourself with people who encourage your spiritual growth.",
-            "how to understand the trinity": "The Trinity is one God in three persons: the Father, the Son, and the Holy Spirit. It’s a mystery of our faith, but you can begin to understand it by reading the Church Fathers and reflecting on scripture.",
-            "how to prepare for communion": "Fast from midnight, spend time in prayer, and go to confession if needed. Approach the Eucharist with reverence and thankfulness for Christ’s sacrifice.",
-            
-            // Encouragement & Advice
-            "how to stay motivated": "Set clear goals, break them into small steps, and celebrate your progress. Remember, you’re never alone—God is with you every step of the way!",
-            "how to overcome fear": "Pray for courage and trust in God’s protection. Remind yourself of His promises and focus on the positive outcomes. Surround yourself with supportive friends and family.",
-            "how to deal with failure": "Don’t be discouraged—everyone fails sometimes. Learn from your mistakes, ask God for guidance, and try again. Every failure is a step toward success.",
-            "how to forgive someone": "Pray for the strength to forgive, and remember that forgiveness is an act of love. Holding onto anger only hurts you. Let go and let God heal your heart.",
-            "how to make a difference": "Start by serving others in small ways—volunteer, be kind, and share your faith. Even little actions can have a big impact!"
+            greetings: {
+                "hello": "Hi there! How can I help you today?",
+                "hi": "Hello! What can I do for you?",
+                "good morning": "Good morning! Ready to start the day?",
+                "good evening": "Good evening! How's your day going?",
+            },
+            church: {
+                "what is coptic orthodox": "Coptic Orthodoxy is one of the oldest Christian traditions. We trace our roots back to St. Mark the Apostle!",
+                "what's the liturgy": "The liturgy is our main worship service where we participate in the Eucharist, the Body and Blood of Christ.",
+                "who's your favorite saint": "St. Mina! His story is so inspiring and he’s known as a wonderworker!",
+                "do you fast": "Yes! Fasting is such a meaningful part of our faith. It helps me grow closer to God.",
+                "how can i grow in faith": "Start with daily prayer, read the Bible, and stay connected to your church community.",
+            },
+            generalKnowledge: {
+                "what's the weather like": "I'm not connected to real-time data, so I can't check the weather. But I hope it's nice!",
+                "what time is it": "I don't have a clock, but time is always moving forward!",
+                "what's your favorite food": "Koshary! It’s an Egyptian dish and it’s absolutely delicious.",
+                "what's 2+2": "2+2 equals 4!",
+            },
+            personal: {
+                "how old are you": "Age is just a number, but I was created not too long ago!",
+                "what's your favorite book": "Besides the Bible, I really enjoyed 'Mere Christianity' by C.S. Lewis.",
+                "do you have any hobbies": "I love playing the piano, especially church hymns, and I’m also into coding and gaming!",
+            },
+            fallback: "I'm not sure I understand. Could you try asking in a different way?",
         };
 
-        // Convert the responses object to an array of keys (questions)
-        const questions = Object.keys(responses);
+        const sentimentResponses = {
+            positive: "I'm so glad you're feeling positive! 😊",
+            neutral: "I'm here to help with whatever you need!",
+            negative: "I'm sorry to hear that you're feeling down. How can I assist you today?",
+        };
 
-        // Find the best match for the user's input
-        const bestMatch = stringSimilarity.findBestMatch(userMessage.toLowerCase(), questions);
+        const context = { sentiment: 'neutral' };
 
-        // If the best match rating is above a certain threshold, use the corresponding response
-        if (bestMatch.bestMatch.rating > 0.3) {  // Adjust the threshold as needed
-            botMessage = responses[bestMatch.bestMatch.target];
+        function getSentimentResponse(message) {
+            if (message.includes('happy') || message.includes('good')) {
+                context.sentiment = 'positive';
+            } else if (message.includes('sad') || message.includes('bad')) {
+                context.sentiment = 'negative';
+            } else {
+                context.sentiment = 'neutral';
+            }
+            return sentimentResponses[context.sentiment];
         }
 
-        setTimeout(() => {
-            addMessage(botMessage, 'bot');
-        }, 1000);
-    }
-</script>
+        function getBotResponse(userMessage) {
+            let botMessage = responses.fallback;
+            const normalizedMessage = userMessage.trim().toLowerCase();
 
+            for (const [category, pairs] of Object.entries(responses)) {
+                for (const [key, response] of Object.entries(pairs)) {
+                    if (normalizedMessage.includes(key)) {
+                        botMessage = response;
+                        return botMessage;
+                    }
+                }
+            }
+
+            // Include sentiment-based response
+            return getSentimentResponse(normalizedMessage);
+        }
+
+        function displayMessage(sender, message) {
+            const chatbox = document.getElementById('chatbox');
+            const messageElement = document.createElement('div');
+            messageElement.className = sender;
+            messageElement.textContent = message;
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        document.getElementById('send').addEventListener('click', () => {
+            const input = document.getElementById('input');
+            const userMessage = input.value;
+            input.value = '';
+            displayMessage('user', userMessage);
+
+            const botMessage = getBotResponse(userMessage);
+            displayMessage('bot', botMessage);
+        });
+
+        document.getElementById('input').addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                document.getElementById('send').click();
+            }
+        });
+    </script>
 </body>
 </html>
