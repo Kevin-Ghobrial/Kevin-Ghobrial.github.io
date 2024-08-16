@@ -3,169 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Chatbot</title>
+    <title>Chatbot</title>
     <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            margin: 0; 
-            padding: 0; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            height: 100vh; 
-            background-color: #f0f2f5; 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
         }
-        #chatbox { 
-            border: 1px solid #ccc; 
-            padding: 10px; 
-            width: 300px; 
-            height: 400px; 
-            overflow-y: scroll; 
-            background-color: #fff; 
-            border-radius: 5px; 
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        .chatbox {
+            width: 300px;
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        .user, .bot { 
-            margin: 5px 0; 
-            padding: 10px; 
-            border-radius: 5px; 
-            max-width: 80%; 
-            word-wrap: break-word; 
+        .chatbox-header {
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
         }
-        .user { 
-            background-color: #e1f5fe; 
-            align-self: flex-end; 
+        .chatbox-body {
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ddd;
         }
-        .bot { 
-            background-color: #e8eaf6; 
-            align-self: flex-start; 
+        .chatbox-footer {
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            display: flex;
         }
-        #input { 
-            width: calc(100% - 90px); 
-            padding: 10px; 
-            border: 1px solid #ccc; 
-            border-radius: 5px; 
-            margin-right: 10px; 
-            box-sizing: border-box; 
+        .chatbox-footer input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            outline: none;
         }
-        #send { 
-            width: 80px; 
-            padding: 10px; 
-            border: none; 
-            background-color: #007bff; 
-            color: white; 
-            border-radius: 5px; 
-            cursor: pointer; 
+        .chatbox-footer button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            background: #007bff;
+            color: #fff;
+            cursor: pointer;
+            margin-left: 8px;
         }
-        #send:hover { 
-            background-color: #0056b3; 
+        .chatbox-footer button:hover {
+            background: #0056b3;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .message.user {
+            text-align: right;
+        }
+        .message.bot {
+            text-align: left;
+        }
+        .message p {
+            margin: 0;
+            padding: 8px;
+            border-radius: 4px;
+        }
+        .message.user p {
+            background: #007bff;
+            color: #fff;
+        }
+        .message.bot p {
+            background: #f1f1f1;
         }
     </style>
 </head>
 <body>
-    <div id="chatbox"></div>
-    <div style="display: flex; align-items: center; width: 300px;">
-        <input type="text" id="input" placeholder="Type a message...">
-        <button id="send">Send</button>
+    <div class="chatbox">
+        <div class="chatbox-header">Chatbot</div>
+        <div class="chatbox-body" id="chatbox-body">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="chatbox-footer">
+            <input type="text" id="user-input" placeholder="Type a message..." />
+            <button id="send-button">Send</button>
+        </div>
     </div>
 
     <script>
-        const responses = {
-            greetings: {
-                "hello": "Hi there! How can I help you today?",
-                "hi": "Hello! What can I do for you?",
-                "good morning": "Good morning! Ready to start the day?",
-                "good evening": "Good evening! How's your day going?",
-            },
-            food: {
-                "breakfast recipe": "How about trying pancakes? Mix 1 cup flour, 1 tbsp sugar, 1 tsp baking powder, 1/2 tsp salt, 1 cup milk, 1 egg, and 2 tbsp melted butter. Cook on a hot griddle until golden brown!",
-                "lunch recipe": "How about a simple salad? Combine mixed greens, cherry tomatoes, cucumber, and your favorite dressing. Add grilled chicken for extra protein!",
-                "dinner recipe": "Try a pasta dish! Cook your favorite pasta, and mix it with a sauce made from sautéed garlic, tomatoes, and basil.",
-            },
-            college: {
-                "college life": "College life can be a mix of challenging and rewarding. It's a time to explore new interests, meet diverse people, and learn a lot!",
-                "what are classes like": "Classes vary widely. Some may be lecture-based while others involve group work and projects. It's important to stay organized and manage your time well.",
-                "how to study effectively": "Try using active study techniques like summarizing information in your own words, using flashcards, and practicing past exams.",
-            },
-            religion: {
-                "jesus": "Jesus is central to Christianity. He is believed to be the Son of God and the savior of humanity.",
-                "coptic": "Coptic Christianity is one of the oldest Christian traditions, with roots tracing back to the early Church and St. Mark the Apostle.",
-                "what's the liturgy": "The liturgy is a significant part of Orthodox worship, involving prayers, hymns, and the Eucharist.",
-            },
-            generalKnowledge: {
-                "what's the weather like": "I'm not connected to real-time data, so I can't check the weather. But I hope it's nice!",
-                "what time is it": "I don't have a clock, but time is always moving forward!",
-                "what's your favorite food": "Koshary! It’s an Egyptian dish and it’s absolutely delicious.",
-                "what's 2+2": "2+2 equals 4!",
-            },
-            personal: {
-                "how old are you": "Age is just a number, but I was created not too long ago!",
-                "what's your favorite book": "Besides the Bible, I really enjoyed 'Mere Christianity' by C.S. Lewis.",
-                "do you have any hobbies": "I love playing the piano, especially church hymns, and I’m also into coding and gaming!",
-            },
-            fallback: "I'm not sure I understand. Could you try asking in a different way?",
+        // Replace this with your actual keyword responses
+        const keywordResponses = {
+            "hello": { response: "Hi there! How can I help you today?", priority: 1 },
+            "hi": { response: "Hello! What can I do for you?", priority: 2 },
+            "thanks": { response: "You're welcome! If you need anything else, just let me know.", priority: 3 },
+            "goodbye": { response: "Goodbye! Have a great day!", priority: 4 },
+            "help": { response: "I'm here to assist you. What do you need help with?", priority: 5 },
+            "problem": { response: "Please describe the problem you're facing, and I'll do my best to help.", priority: 6 },
+            "question": { response: "Feel free to ask me anything. I'll try to answer.", priority: 7 },
+            "support": { response: "I'm here for support. What do you need help with?", priority: 8 },
+            "contact": { response: "You can reach us through the contact form or email us directly.", priority: 9 },
+            "information": { response: "What information are you looking for?", priority: 10 },
+            "feedback": { response: "We appreciate your feedback. How can we improve?", priority: 11 },
+            "error": { response: "It seems there was an error. Can you provide more details?", priority: 12 },
+            "issue": { response: "What issue are you experiencing? Let me know, and I'll assist you.", priority: 13 },
+            "solution": { response: "I can help you find a solution. Please provide more details.", priority: 14 },
+            "order": { response: "What would you like to know about your order?", priority: 15 },
+            "status": { response: "Please provide more details about what you're inquiring about.", priority: 16 },
+            "payment": { response: "If you have payment questions, let me know the details.", priority: 17 },
+            "delivery": { response: "What questions do you have about delivery?", priority: 18 },
+            "account": { response: "What do you need to know about your account?", priority: 19 },
+            "login": { response: "To log in, please enter your credentials.", priority: 20 },
+            "register": { response: "You can register by providing your details in the sign-up form.", priority: 21 },
+            "password": { response: "Forgot your password? I can help with that.", priority: 22 },
+            "reset": { response: "To reset your password, follow the instructions sent to your email.", priority: 23 },
+            "update": { response: "What would you like to update? Let me know.", priority: 24 },
+            "change": { response: "Please specify what you'd like to change.", priority: 25 },
+            "subscription": { response: "What do you need to know about your subscription?", priority: 26 },
+            "feature": { response: "Is there a specific feature you're interested in?", priority: 27 },
+            "product": { response: "Which product are you referring to?", priority: 28 },
+            "service": { response: "What services are you interested in?", priority: 29 },
+            "price": { response: "What questions do you have about the price?", priority: 30 },
+            "discount": { response: "Looking for discounts? Let me help you with that.", priority: 31 },
+            "promotion": { response: "Are you interested in our current promotions?", priority: 32 },
+            "offer": { response: "What kind of offers are you looking for?", priority: 33 },
+            "feature": { response: "Are you interested in learning about specific features?", priority: 34 },
+            "specification": { response: "Which specifications are you interested in?", priority: 35 },
+            "review": { response: "Would you like to leave a review or read others' reviews?", priority: 36 },
+            "rating": { response: "Please provide your rating or review here.", priority: 37 },
+            "testimonials": { response: "Check out our customer testimonials for feedback.", priority: 38 },
+            "demo": { response: "Would you like a demo of our product or service?", priority: 39 },
+            "trial": { response: "We offer a free trial. Would you like to try it?", priority: 40 },
+            "sample": { response: "Would you like to request a sample?", priority: 41 },
+            "demo": { response: "We can arrange a demo for you. Let me know your availability.", priority: 42 },
+            "tutorial": { response: "We have tutorials available. What would you like to learn?", priority: 43 },
+            "guide": { response: "Would you like a guide on how to use our product?", priority: 44 },
+            "manual": { response: "You can access the user manual here.", priority: 45 },
+            "FAQ": { response: "Check our FAQ section for common questions and answers.", priority: 46 },
+            "support": { response: "Our support team is available for further assistance.", priority: 47 },
+            "team": { response: "Would you like to know more about our team?", priority: 48 },
+            "company": { response: "Find out more about our company and its history.", priority: 49 },
+            "mission": { response: "Learn about our mission and values.", priority: 50 },
+            "vision": { response: "Discover our vision for the future.", priority: 51 },
+            "career": { response: "Interested in a career with us? Check out our job openings.", priority: 52 },
+            "job": { response: "Explore our current job opportunities.", priority: 53 },
+            "vacancy": { response: "See our latest job vacancies.", priority: 54 },
+            "apply": { response: "Apply for a position by submitting your application here.", priority: 55 },
+            "interview": { response: "Prepare for your interview with our tips and guidelines.", priority: 56 },
+            "salary": { response: "Questions about salary? Let us know your queries.", priority: 57 },
+            "benefits": { response: "Learn about the benefits we offer to our employees.", priority: 58 },
+            "culture": { response: "Discover our company culture and work environment.", priority: 59 },
+            "events": { response: "Find out about upcoming events and webinars.", priority: 60 },
+            "news": { response: "Stay updated with the latest news from our company.", priority: 61 },
+            "blog": { response: "Read our blog for insights and updates.", priority: 62 },
+            "newsletter": { response: "Sign up for our newsletter to receive updates.", priority: 63 },
+            "article": { response: "Check out our latest articles for valuable information.", priority: 64 },
+            "resource": { response: "Access additional resources and materials here.", priority: 65 },
+            "guide": { response: "Our guides provide detailed information on various topics.", priority: 66 },
+            "reference": { response: "Use our reference materials for in-depth understanding.", priority: 67 },
+            "library": { response: "Browse our library of resources and documents.", priority: 68 },
+            "download": { response: "Download our resources and documents here.", priority: 69 },
+            "upload": { response: "Upload your files or documents as needed.", priority: 70 },
+            "file": { response: "Manage your files and documents here.", priority: 71 },
+            "document": { response: "Access important documents and files here.", priority: 72 },
+            "record": { response: "Record your data or input here.", priority: 73 },
+            "archive": { response: "Find archived files and documents here.", priority: 74 },
+            "storage": { response: "Manage your storage and data usage here.", priority: 75 },
+            "security": { response: "Learn about our security measures and protocols.", priority: 76 },
+            "privacy": { response: "Read our privacy policy to understand how we handle your data.", priority: 77 },
+            "terms": { response: "Review our terms and conditions for using our services.", priority: 78 },
+            "policy": { response: "Check out our policies related to various aspects of our services.", priority: 79 },
+            "agreement": { response: "Understand our agreement terms and conditions.", priority: 80 },
+            "contract": { response: "Review the contract terms for our services.", priority: 81 },
+            "legal": { response: "Find legal information related to our services here.", priority: 82 },
+            "compliance": { response: "Learn about our compliance with regulations and standards.", priority: 83 },
+            "regulation": { response: "Understand the regulations we adhere to.", priority: 84 },
+            "certification": { response: "Check out our certifications and accreditations.", priority: 85 },
+            "audit": { response: "Find information about our audit processes and results.", priority: 86 },
+            "review": { response: "Read our review and audit reports.", priority: 87 },
+            "assessment": { response: "Learn about our assessment procedures and results.", priority: 88 },
+            "evaluation": { response: "Explore our evaluation criteria and processes.", priority: 89 },
+            "rating": { response: "Check out our rating and performance metrics.", priority: 90 },
+            "benchmark": { response: "Compare our performance with industry benchmarks.", priority: 91 },
+            "analysis": { response: "Access detailed analysis reports and data.", priority: 92 },
+            "report": { response: "Read our latest reports and findings.", priority: 93 },
+            "survey": { response: "Participate in our surveys and provide feedback.", priority: 94 },
+            "feedback": { response: "We value your feedback. Share your thoughts with us.", priority: 95 },
+            "comment": { response: "Leave a comment or question here.", priority: 96 },
+            "opinion": { response: "Share your opinion or thoughts on the matter.", priority: 97 },
+            "suggestion": { response: "Have a suggestion? Let us know how we can improve.", priority: 98 },
+            "recommendation": { response: "We appreciate recommendations. Share yours here.", priority: 99 },
+            "idea": { response: "Got an idea? We'd love to hear it!", priority: 100 }
         };
 
-        const sentimentResponses = {
-            positive: "I'm so glad you're feeling positive! 😊",
-            neutral: "I'm here to help with whatever you need!",
-            negative: "I'm sorry to hear that you're feeling down. How can I assist you today?",
-        };
 
-        const context = { sentiment: 'neutral' };
-
-        function getSentimentResponse(message) {
-            if (message.includes('happy') || message.includes('good')) {
-                context.sentiment = 'positive';
-            } else if (message.includes('sad') || message.includes('bad')) {
-                context.sentiment = 'negative';
-            } else {
-                context.sentiment = 'neutral';
+        document.getElementById('send-button').addEventListener('click', function() {
+            const input = document.getElementById('user-input').value.trim();
+            if (input) {
+                addMessage('user', input);
+                const response = getResponse(input);
+                if (response) {
+                    addMessage('bot', response);
+                } else {
+                    addMessage('bot', "I'm not sure how to respond to that.");
+                }
+                document.getElementById('user-input').value = '';
             }
-            return sentimentResponses[context.sentiment];
+        });
+
+        function addMessage(sender, text) {
+            const chatboxBody = document.getElementById('chatbox-body');
+            const message = document.createElement('div');
+            message.className = `message ${sender}`;
+            message.innerHTML = `<p>${text}</p>`;
+            chatboxBody.appendChild(message);
+            chatboxBody.scrollTop = chatboxBody.scrollHeight; // Scroll to the bottom
         }
 
-        function getBotResponse(userMessage) {
-            let botMessage = responses.fallback;
-            const normalizedMessage = userMessage.trim().toLowerCase();
+        function getResponse(input) {
+            const words = input.toLowerCase().split(/\s+/);
+            let bestMatch = { response: null, priority: Infinity };
 
-            for (const [category, pairs] of Object.entries(responses)) {
-                for (const [key, response] of Object.entries(pairs)) {
-                    if (normalizedMessage.includes(key)) {
-                        botMessage = response;
-                        return botMessage;
+            for (const [keyword, { response, priority }] of Object.entries(keywordResponses)) {
+                for (const word of words) {
+                    if (word.includes(keyword)) {
+                        if (priority < bestMatch.priority) {
+                            bestMatch = { response, priority };
+                        }
                     }
                 }
             }
 
-            // Include sentiment-based response
-            return getSentimentResponse(normalizedMessage);
+            return bestMatch.response;
         }
-
-        function displayMessage(sender, message) {
-            const chatbox = document.getElementById('chatbox');
-            const messageElement = document.createElement('div');
-            messageElement.className = sender;
-            messageElement.textContent = message;
-            chatbox.appendChild(messageElement);
-            chatbox.scrollTop = chatbox.scrollHeight;
-        }
-
-        document.getElementById('send').addEventListener('click', () => {
-            const input = document.getElementById('input');
-            const userMessage = input.value;
-            input.value = '';
-            displayMessage('user', userMessage);
-
-            const botMessage = getBotResponse(userMessage);
-            displayMessage('bot', botMessage);
-        });
-
-        document.getElementById('input').addEventListener('keypress', (event) => {
-            if (event.key === 'Enter') {
-                document.getElementById('send').click();
-            }
-        });
     </script>
 </body>
 </html>
