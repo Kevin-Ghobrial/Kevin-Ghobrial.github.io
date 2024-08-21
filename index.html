@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="index.css">
     <style>
         .oval-button {
-            border-radius: 20px; /* Adjust the value as needed */
+            border-radius: 20px; 
             background-color: #333;
             color: #FF416C;
             padding: 10px 20px;
@@ -23,9 +23,9 @@
         }
 
         .oval-button:hover {
-            background: #FF416C; /* Change background to transparent on hover */
+            background: #FF416C; 
             cursor: pointer;
-            color: #333; /* Change text color to dark gray on hover */
+            color: #333; 
         }
 
         #play-button {
@@ -45,19 +45,19 @@
         }
 
         #soundcloud_player {
-            display: none; /* Hide the iframe */
+            display: none; 
         }
         #chatbot-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 250px; /* Reduced width */
-            background-color: #333; /* Dark gray background */
-            border: 2px solid #FF416C; /* Hot pink border */
+            width: 250px; 
+            background-color: #333; 
+            border: 2px solid #FF416C; 
             border-radius: 10px;
             padding: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            color: #FF416C; /* Hot pink text */
+            color: #FF416C; 
         }
         
         #chatbot-title {
@@ -65,30 +65,30 @@
             font-weight: bold;
             margin-bottom: 10px;
             text-align: center;
-            color: #FF416C; /* Hot pink text */
+            color: #FF416C; 
         }
         
         #chatbox {
-            height: 150px; /* Reduced height */
+            height: 150px; 
             overflow-y: scroll;
-            border-bottom: 1px solid #FF416C; /* Hot pink border */
+            border-bottom: 1px solid #FF416C; 
             padding-bottom: 10px;
             margin-bottom: 10px;
-            background-color: #444; /* Slightly lighter dark gray for the chatbox background */
-            color: #FF416C; /* Hot pink text */
+            background-color: #444; 
+            color: #FF416C; 
         }
         
         #userInput {
-            width: 70%; /* Adjusted width to fit smaller box */
+            width: 70%; 
             padding: 5px;
-            border: 1px solid #FF416C; /* Hot pink border */
+            border: 1px solid #FF416C;
             border-radius: 5px;
-            background-color: #555; /* Dark gray input background */
-            color: #FF416C; /* Hot pink text */
+            background-color: #555; 
+            color: #FF416C; 
         }
         
         #chatbot-container button {
-            width: 25%; /* Adjusted width to fit smaller box */
+            width: 25%; 
             padding: 5px;
             background-color: #FF416C;
             color: white;
@@ -98,8 +98,8 @@
         }
         
         #chatbot-container button:hover {
-            background-color: #FF416C; /* Keep button background hot pink */
-            color: #333; /* Change text color to dark gray on hover */
+            background-color: #FF416C; 
+            color: #333; 
         }
 
     </style>
@@ -134,7 +134,7 @@
     <div id="chatbot-container">
         <div id="chatbot-title">Kevin's Chat Bot (Not biased at all)</div>
         <div id="chatbox">
-            <!-- Chat messages will go here -->
+          
         </div>
         <input type="text" id="userInput" placeholder="Ask me anything..." />
         <button onclick="getResponse()">Send</button>
@@ -235,8 +235,8 @@
                 for (let i = 0; i < 10; i++) {
                     const randomTrackUrl = getRandomTrack();
                     setTimeout(() => {
-                        playTrackAndStopAfterDelay(randomTrackUrl, 10000); // 10 seconds delay to stop each track
-                    }, i * 10000); // 10 seconds interval between each hit
+                        playTrackAndStopAfterDelay(randomTrackUrl, 10000);
+                    }, i * 10000); // 10 Second interval between each play
                 }
             });
         });
