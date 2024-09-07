@@ -133,11 +133,12 @@
 
     <div id="chatbot-container">
         <div id="chatbot-title">Kevin's Chat Bot (Not biased at all)</div>
+        <div id="chatbot-header" onclick="toggleChatbot()">Chat with me!</div>
         <div id="chatbox">
-          
+            <!-- Chat messages will appear here -->
         </div>
         <input type="text" id="userInput" placeholder="Ask me anything..." />
-        <button onclick="getResponse()">Send</button>
+        <button id="sendButton" onclick="getResponse()">Send</button>
     </div>
 
     </center>
@@ -241,26 +242,40 @@
             });
         });
         
+        function toggleChatbot() {
+            const chatbotContainer = document.getElementById('chatbot-container');
+            const chatbox = document.getElementById('chatbox');
+
+            if (chatbox.style.display === 'none' || chatbox.style.display === '') {
+                chatbox.style.display = 'block'; // Show the chatbox
+                chatbotContainer.style.height = '400px'; // Set expanded height
+            } else {
+                chatbox.style.display = 'none'; // Hide the chatbox
+                chatbotContainer.style.height = '60px'; // Set minimized height
+            }
+        }
+
+        // Function to handle sending messages
         function getResponse() {
             const userInput = document.getElementById("userInput").value.toLowerCase();
             const chatbox = document.getElementById("chatbox");
-        
+
             let response = "";
-        
+
             const responses = {
-               introduction: [
+                introduction: [
                     "Hey, I just wanted to say that Kevin is amazing",
                     "Hey there! I exist solely to hype up Kevin Ghobrial.",
                     "I'm just here to tell you how awesome Kevin Ghobrial is!",
                     "Did I tell you how cool Kevin is?"
                 ],
                 projects: [
-                    "Kevin's projects are groundbreaking, like the AI_HandTracker and the Free Chess.com Game Review bot!. If you want to learn more, scroll down :)",
+                    "Kevin's projects are groundbreaking, like the AI_HandTracker and the Free Chess.com Game Review bot! If you want to learn more, scroll down :)",
                     "Check out Kevin's amazing work! From AI to microcontrollers, he's done it all. If you want to learn more, scroll down :)",
                     "Kevin's portfolio is full of innovative projects, each more impressive than the last. If you want to learn more, scroll down :)"
                 ],
                 skills: [
-                    "Kevin is Skilled at a lot of things. Particularly, Java, Python, C++, C, assembly, JavaScript, and Digital Design!",
+                    "Kevin is skilled at a lot of things. Particularly, Java, Python, C++, C, assembly, JavaScript, and Digital Design!",
                     "Whether it's coding, designing, or solving complex problems, Kevin can do it all.",
                     "Kevin's skills are unmatched, making him a top choice for any tech project."
                 ],
@@ -279,8 +294,8 @@
                     "Wake up? Kevin is already at the top of his game!"
                 ]
             };
-        
-            // Keyword matching:)
+
+            // Keyword matching
             if (userInput.includes("who are you")) {
                 response = responses.introduction[Math.floor(Math.random() * responses.introduction.length)];
             } else if (userInput.includes("projects") || userInput.includes("work")) {
@@ -294,14 +309,13 @@
             } else {
                 response = responses.default[Math.floor(Math.random() * responses.default.length)];
             }
-        
+
             chatbox.innerHTML += `<p>You: ${userInput}</p>`;
             chatbox.innerHTML += `<p>Bot: ${response}</p>`;
 
             chatbox.scrollTop = chatbox.scrollHeight;
             document.getElementById("userInput").value = "";
         }
-        
 
     </script>
 
